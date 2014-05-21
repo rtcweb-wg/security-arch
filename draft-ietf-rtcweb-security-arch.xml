@@ -2162,9 +2162,7 @@ IdP Proxy -> PeerConnection:
           </list>
         </t>
       </section>
-
-    </section>
-
+      
     <section title="Acknowledgements">
       <t>
         Bernard Aboba, Harald Alvestrand, Richard Barnes, Dan Druta, Cullen
