@@ -867,9 +867,10 @@
         </t>
         <t>
           All media channels MUST be secured via SRTP.  Media traffic MUST NOT
-          be sent over plain (unencrypted) RTP.  DTLS-SRTP MUST be offered for
-          every media channel. WebRTC implements MUST NOT offer SDES or
-          select it if offered.
+          be sent over plain (unencrypted) RTP; that is, implementations MUST
+          NOT negotiate cipher suites with NULL encryption modes.  DTLS-SRTP
+          MUST be offered for every media channel.  WebRTC implements MUST NOT
+          offer SDES or select it if offered.
         </t>
         <t>
           All data channels MUST be secured via DTLS.
