@@ -4,4 +4,10 @@ python:
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install xml2rfc
 # command to run tests, e.g. python setup.py test
-script: make
+script: make upload
+
+env:
+ global:
+ - GH_REF: github.com/rtcweb-wg/security-arch.git
+ - secure: "Dyu6BRI5Gyidgnshtz4qNvDtXfGLhsoOH9KIyGpk+3RgDYpE2t0uL2D1oWAr7oNbgzHuBpEkd4HaSigs0Yu5UgmQXvhwjBO/ChrleX9g4lVx7qjkOGEz94o6B/FI/ygqmQ819V4CyldZkSYyAJSaL0/OanwuKZ6CejKpCyJYJeo="
+
