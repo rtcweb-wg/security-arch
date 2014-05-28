@@ -2362,6 +2362,7 @@ IdP Proxy -> PeerConnection:
         <format target="http://www.w3.org/TR/XMLHttpRequest/" type="TXT"/>
       </reference>
 
+
     </references>
 
     <section title="Example IdP Bindings to Specific Protocols">
