@@ -2357,7 +2357,7 @@ IdP Proxy -> PeerConnection:
           <author initials="A." surname="van Kesteren">
             <organization></organization>
           </author>
-          <date day="17", month="January" year="2012"/>
+          <date day="17" month="January" year="2012"/>
         </front>
         <format target="http://www.w3.org/TR/XMLHttpRequest/" type="TXT"/>
       </reference>
