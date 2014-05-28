@@ -2342,9 +2342,11 @@ IdP Proxy -> PeerConnection:
     </references>
 
    <references title="Informative References">
+      &RFC2617;
       &RFC3261;
       &RFC5705;
       &RFC6455;
+      &RFC6265;
       &I-D.ietf-rtcweb-jsep;
 
 
