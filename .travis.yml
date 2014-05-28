@@ -9,5 +9,5 @@ script: make upload
 env:
  global:
  - GH_REF: github.com/rtcweb-wg/security-arch.git
- - secure: "Dyu6BRI5Gyidgnshtz4qNvDtXfGLhsoOH9KIyGpk+3RgDYpE2t0uL2D1oWAr7oNbgzHuBpEkd4HaSigs0Yu5UgmQXvhwjBO/ChrleX9g4lVx7qjkOGEz94o6B/FI/ygqmQ819V4CyldZkSYyAJSaL0/OanwuKZ6CejKpCyJYJeo="
+ - secure: "MqWMRIJ+9AVNhPPkplnnF4nIVgOqzNPvhLD4ghxkf86U4KYBzlxZj12WK9b50XdJGsAZdMz2V4iuZ5yYikX0aSuUcR9hvwPsLMqeRpSssNrLI29RQBihQzhn9/6j9LK82Iv/hs69owFhqUBHxi5PtsYtfokCkLas8gtJdKj5hZo="
 
