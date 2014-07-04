@@ -1507,7 +1507,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                   </t>
                   <t hangText="protocol:">
                     The specific IdP protocol which the IdP is using. This is a
-                    completely IdP-specific string, but allows an IdP to
+                    completely opaque IdP-specific string, but allows an IdP to
                     implement two protocols in parallel. This value may be the
                     empty string.
                   </t>
