@@ -878,12 +878,13 @@
           All data channels MUST be secured via DTLS.
         </t>
         <t>
-          [[OPEN ISSUE: Are these the right cipher suites?]]
-          All implementations MUST implement the following two cipher suites:
-          TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 and TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-          and the DTLS-SRTP protection profile SRTP_AES128_CM_HMAC_SHA1_80.
-          Implementations SHOULD favor cipher suites which support PFS over
-          non-PFS cipher suites.
+          All implementations MUST implement both DTLS 1.2 and DTLS
+          1.0, with the cipher suites TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 and
+          TLS_DHE_RSA_WITH_AES_128_CBC_SHA and the DTLS-SRTP protection profile
+          SRTP_AES128_CM_HMAC_SHA1_80. Implementations SHOULD favor cipher
+          suites which support PFS over non-PFS cipher suites and GCM over
+          CBC cipher suites.
+          [[OPEN ISSUE: Should we require ECDHE? Waiting for TLS WG Consensus.]]
         </t>
         <!-- OPEN ISSUE: DTLS-SRTP key origin scoping? -->
         <t>
