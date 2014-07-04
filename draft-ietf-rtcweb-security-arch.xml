@@ -1301,14 +1301,14 @@ v=0
 o=- 1181923068 1181923196 IN IP4 ua1.example.com
 s=example1
 c=IN IP4 ua1.example.com
-a=setup:actpass
 a=fingerprint:sha-1 \
   4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB
 a=identity:\
-  ImlkcCI6eyJkb21haW4iOiAiZXhhbXBsZS5vcmciLCAicHJvdG9jb2wiOiAiYm9n\
-  dXMifSwiYXNzZXJ0aW9uIjpcIntcImlkZW50aXR5XCI6XCJib2JAZXhhbXBsZS5v\
-  cmdcIixcImNvbnRlbnRzXCI6XCJhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3l6XCIs\
-  XCJzaWduYXR1cmVcIjpcIjAxMDIwMzA0MDUwNlwifSJ9Cg==
+  eyJpZHAiOnsiZG9tYWluIjoiZXhhbXBsZS5vcmciLCJwcm90b2NvbCI6ImJvZ3Vz\
+  In0sImFzc2VydGlvbiI6IntcImlkZW50aXR5XCI6XCJib2JAZXhhbXBsZS5vcmdc\
+  IixcImNvbnRlbnRzXCI6XCJhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3l6XCIsXCJz\
+  aWduYXR1cmVcIjpcIjAxMDIwMzA0MDUwNlwifSJ9
+a=...
 t=0 0
 m=audio 6056 RTP/SAVP 0
 a=sendrecv
@@ -1643,18 +1643,11 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                 <artwork><![CDATA[
 PeerConnection -> IdP proxy:
   {
-<<<<<<< HEAD
     "type": "SIGN",
     "id": "1",
     "origin": "https://calling-service.example.com/",
-    "message": "abcdefghijklmnopqrstuvwyz"
-=======
-     "type":"SIGN",
-     "id":1,
-     "origin":"https://calling-service.example.com/",
-     "message": "abcdefghijklmnopqrstuvwyz",
-     "username": "bob"
->>>>>>> martin/username
+    "message": "abcdefghijklmnopqrstuvwyz",
+    "username": "bob"
   }
 
 IdPProxy -> PeerConnection:
@@ -1663,7 +1656,7 @@ IdPProxy -> PeerConnection:
     "id": "1",
     "message": {
       "idp":{
-        "domain": "example.org"
+        "domain": "example.org",
         "protocol": "bogus"
       },
       "assertion": "{\"identity\":\"bob@example.org\",
@@ -1709,7 +1702,7 @@ IdPProxy -> PeerConnection:
   {
     "type": "LOGINNEEDED",
     "id": "1",
-    "error": "...a message explaining the reason for failure..."
+    "error": "...a message explaining the reason for failure...",
     "loginUrl": "https://example.org/login?context=e982606f4fd5"
   }
 ]]></artwork>
