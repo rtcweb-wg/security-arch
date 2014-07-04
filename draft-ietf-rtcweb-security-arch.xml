@@ -32,7 +32,7 @@
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
 <!ENTITY I-D.ietf-tsvwg-sctp-dtls-encaps SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tsvwg-sctp-dtls-encaps.xml">
-<!ENTITY I-D.ietf-ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-ietf-rtcweb-rtp-usage.xml">
+<!ENTITY I-D.ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-rtp-usage.xml">
 <!ENTITY I-D.muthu-behave-consent-freshness SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.muthu-behave-consent-freshness.xml">
 ]>
 
