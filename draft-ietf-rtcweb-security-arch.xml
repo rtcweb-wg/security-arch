@@ -32,6 +32,7 @@
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
 <!ENTITY I-D.ietf-tsvwg-sctp-dtls-encaps SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tsvwg-sctp-dtls-encaps.xml">
+<!ENTITY I-D.ietf-ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-ietf-rtcweb-rtp-usage.xml">
 <!ENTITY I-D.muthu-behave-consent-freshness SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.muthu-behave-consent-freshness.xml">
 ]>
 
@@ -1998,6 +1999,10 @@ IdP Proxy -> PeerConnection:
             not be able to control the ufrag and password).
           </t>
           <t>
+            <xref target="I-D.ietf-rtcweb-rtp-usage"/> Section 13 documents a number
+            of potential RTCP-based DoS attacks and countermeasures.
+          </t>
+          <t>
             Note that attacks based on confusing one end or the other about
             consent are possible even in the face of the third-party identity
             mechanism as long as major parts of the signaling messages are not
@@ -2291,6 +2296,7 @@ IdP Proxy -> PeerConnection:
       &I-D.muthu-behave-consent-freshness;
       &I-D.ietf-avtcore-6222bis;
       &I-D.ietf-tsvwg-sctp-dtls-encaps;
+      &I-D.ietf-rtcweb-rtp-usage;
 
       <reference anchor="webcrypto">
         <front>
