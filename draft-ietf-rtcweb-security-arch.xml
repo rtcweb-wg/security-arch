@@ -248,7 +248,7 @@
     <section title="Overview" anchor="sec.proposal.overview">
       <!-- TODO: Federated -->
       <t>
-        This section describes a typical RTCWeb session and shows how the
+        This section describes a typical WebRTC session and shows how the
         various security elements interact and what guarantees are provided to
         the user. The example in this section is a "best case" scenario in which
         we provide the maximal amount of user authentication and media privacy
@@ -373,8 +373,8 @@
           later).  They are both connected to the calling service via HTTPS and
           so know the origin with some level of confidence. They also have
           accounts with some identity provider.  This sort of identity service
-          is becoming increasingly common in the Web environment in technologies
-          such (BrowserID, Federated Google Login, Facebook Connect, OAuth,
+          is becoming increasingly common in the Web environment (with technologies
+          such as BrowserID, Federated Google Login, Facebook Connect, OAuth,
           OpenID, WebFinger), and is often provided as a side effect service of
           a user's ordinary accounts with some service. In this example, we show
           Alice and Bob using a separate identity service, though the identity
@@ -550,8 +550,8 @@
           freshness", i.e., allowing Alice to verify that Bob is still prepared
           to receive her communications so that Alice does not continue to send
           large traffic volumes to entities which went abruptly offline. ICE
-          specifies periodic STUN keepalizes but only if media is not flowing.
-          Because the consent issue is more difficult here, we require RTCWeb
+          specifies periodic STUN keepalives but only if media is not flowing.
+          Because the consent issue is more difficult here, we require WebRTC
           implementations to periodically send keepalives.  As described in
           Section 5.3, these keepalives MUST be based on the consent freshness
           mechanism specified in <xref
@@ -776,9 +776,9 @@
           NOT be permitted to control the local ufrag and password, though it of
           course knows it.
         </t>
-        <t>
-          While continuing consent is required, that ICE <xref
-          target="RFC5245"/>; Section 10 keepalives STUN Binding Indications are
+        <t> <!-- FIXME: phrasing of first sentence still awkward -->
+          While continuing consent is required, the ICE <xref
+          target="RFC5245"/>; Section 10 keepalives use STUN Binding Indications which are
           one-way and therefore not sufficient.  The current WG consensus is to
           use ICE Binding Requests for continuing consent freshness. ICE already
           requires that implementations respond to such requests, so this
@@ -988,8 +988,8 @@
       <section title="Web-Based Peer Authentication" anchor="sec.generic.idp">
         <t>
           In a number of cases, it is desirable for the endpoint (i.e., the
-          browser) to be able to directly identity the endpoint on the other
-          side without trusting only the signaling service to which they are
+          browser) to be able to directly identify the endpoint on the other
+          side without trusting the signaling service to which they are
           connected. For instance, users may be making a call via a federated
           system where they wish to get direct authentication of the other
           side. Alternately, they may be making a call on a site which they
@@ -998,7 +998,7 @@
         </t>
         <t>
           Recently, a number of Web-based identity technologies (OAuth,
-          BrowserID, Facebook Connect), etc. have been developed. While the
+          BrowserID, Facebook Connect etc.) have been developed. While the
           details vary, what these technologies share is that they have a
           Web-based (i.e., HTTP/HTTPS) identity provider which attests to your
           identity. For instance, if I have an account at example.org, I could
@@ -1219,8 +1219,8 @@
               <t>
                 The precise information from the signaling message that must be
                 cryptographically bound to the user's identity and a mechanism
-                for carrying assertions in JSEP messages. <xref
-                target="sec.jsep-binding"/>
+                for carrying assertions in JSEP messages. This is specified in 
+                <xref target="sec.jsep-binding"/>.
               </t>
 
               <t>
@@ -1510,7 +1510,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                   <t hangText="protocol:">
                     The specific IdP protocol which the IdP is using. This is a
                     completely opaque IdP-specific string, but allows an IdP to
-                    implement two protocols in parallel. This value may be the
+                    implement multiple protocols in parallel. This value may be the
                     empty string.
                   </t>
                 </list>
@@ -1962,7 +1962,7 @@ IdP Proxy -> PeerConnection:
           </t>
           <t>
             Consider the case of a call center which accepts calls via
-            RTCWeb. An attacker proxies the call center's front-end and arranges
+            WebRTC. An attacker proxies the call center's front-end and arranges
             for multiple clients to initiate calls to the call center. Note that
             this requires user consent in many cases but because the data
             channel does not need consent, he can use that directly. Since ICE
@@ -2027,7 +2027,7 @@ IdP Proxy -> PeerConnection:
           <section title="PeerConnection Origin Check" anchor="sec.pc-origin">
             <t>
               Fundamentally, the IdP proxy is just a piece of HTML and JS loaded
-              by the browser, so nothing stops a Web attacker o from creating
+              by the browser, so nothing stops a Web attacker from creating
               their own IFRAME, loading the IdP proxy HTML/JS, and requesting a
               signature. In order to prevent this attack, we require that all
               signatures be tied to a specific origin ("rtcweb://...") which
