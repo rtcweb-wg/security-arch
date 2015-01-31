@@ -1558,13 +1558,10 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                 instead indicate a URL where login should proceed.
               </t>
               <t>
-                A calling site is then able to load the provided URL in an
-                IFRAME in order to trigger the required user interactions.  Once
-                any user interactions are complete, the IFRAME MUST send a <xref
-                target="WebMessaging">postMessage</xref> to the calling site
-                indicating that login has completed.  Any message is sufficient
-                for this purpose, the <spanx style="verb">source</spanx>
-                parameter identifies the originating IFRAME.
+                The application can then load the provided URL to enable the
+                user to enter credentials.  The communication between the
+                application and the IdP is described in <xref
+                target="webrtc-api"/>.
               </t>
             </section>
           </section>
