@@ -1163,7 +1163,7 @@
      |                 v                    |
      |          PeerConnection              |
      |                 ^                    |
-     |                 | MessageChannel     |
+     |                 | API Calls          |
      |     +-----------|-------------+      |   +---------------+
      |     |           v             |      |   |               |
      |     |       IdP Proxy         |<-------->|   Identity    |
@@ -1180,83 +1180,72 @@
             <list style="numbers">
               <t>
                 The browser (the PeerConnection component) instantiates an IdP
-                proxy with its source at the IdP. This allows the IdP to load
-                whatever JS is necessary into the proxy, which runs in the IdP's
-                security context.  The browser uses a <xref
-                target="WebMessaging">MessageChannel</xref> to interact with the
-                IdP proxy.
+                proxy. This allows the IdP to load whatever JS is necessary into
+                the proxy.  The resulting code runs in the IdP's security
+                context.
               </t>
               <t>
-                Once the IdP is ready, the IdP proxy uses the MessageChannel to
-                notify the browser that it is ready.
+                The IdP registers an object with the browser that conforms to
+                the API defined in <xref target="webrtc-api"/>.
               </t>
               <t>
-                The browser and IdP proxy communicate using the MessageChannel
-                using a standardized message exchange to create or verify
-                identity assertions.
+                The browser invokes methods on the object registered by the IdP
+                proxy to create or verify identity assertions.
               </t>
             </list>
           </t>
           <t>
             This approach allows us to decouple the browser from any particular
             identity provider; the browser need only know how to load the IdP's
-            JavaScript--which is deterministic from the IdP's identity--and the
-            generic protocol for requesting and verifying assertions. The IdP
-            provides whatever logic is necessary to bridge the generic protocol
-            to the IdP's specific requirements. Thus, a single browser can
-            support any number of identity protocols, including being forward
-            compatible with IdPs which did not exist at the time the browser was
-            written.
+            JavaScript--the location of which is determined based on the IdP's
+            identity--and to call the generic API for requesting and verifying
+            identity assertions. The IdP provides whatever logic is necessary to
+            bridge the generic protocol to the IdP's specific
+            requirements. Thus, a single browser can support any number of
+            identity protocols, including being forward compatible with IdPs
+            which did not exist at the time the browser was written.
           </t>
         </section>
 
         <section title="Items for Standardization" anchor="sec.standardized">
           <t>
-            In order to make this work, we must standardize the following items:
+            There are two parts to this work:
           </t>
           <t>
             <list style="symbols">
               <t>
                 The precise information from the signaling message that must be
                 cryptographically bound to the user's identity and a mechanism
-                for carrying assertions in JSEP messages. <xref
-                target="sec.jsep-binding"/>
+                for carrying assertions in JSEP messages, see <xref
+                target="sec.jsep-binding"/>.
               </t>
 
               <t>
-                The interface to the IdP. <xref target="sec.protocol-details"/>
-                specifies a specific protocol mechanism which allows the use of
-                any identity protocol without requiring specific further
-                protocol support in the browser
-              </t>
-              <t>
-                The JavaScript interfaces which the calling application can use
-                to specify the IdP to use to generate assertions and to discover
-                what assertions were received.
+                The interface to the IdP, which is defined in the companion W3C
+                WebRTC API specification <xref target="webrtc-api"/>.
               </t>
             </list>
           </t>
           <t>
-            The first two items are defined in this document. The final one is
-            defined in the companion W3C WebRTC API specification <xref
-            target="webrtc-api"/>.
+            The WebRTC API specification also defines JavaScript interfaces that
+            the calling application can use to specify which IdP to use.  That
+            API also provides access to the assertion-generation capability and
+            the status of the validation process.
           </t>
         </section>
 
         <section title="Binding Identity Assertions to JSEP Offer/Answer Transactions" anchor="sec.jsep-binding">
 
-          <section title="Input to Assertion Generation Process" anchor="sec.idp-input">
-            <t>
-              An identity assertion binds the user's identity (as asserted by
-              the IdP) to the SDP offer/exchange transaction and specifically to
-              the media. In order to achieve this, the PeerConnection must
-              provide the DTLS-SRTP fingerprint to be bound to the
-              identity. This is provided as a JavaScript object (also known as a
-              dictionary or hash) with a single <spanx
-              style="verb">fingerprint</spanx> key, as shown below:
-            </t>
-            <figure>
-              <artwork><![CDATA[
+          <t>
+            An identity assertion binds the user's identity (as asserted by the
+            IdP) to the SDP offer/exchange transaction and specifically to the
+            media. In order to achieve this, the PeerConnection must provide the
+            DTLS-SRTP fingerprint to be bound to the identity. This is provided
+            as a JavaScript object (also known as a dictionary or hash) with a
+            single <spanx style="verb">fingerprint</spanx> key, as shown below:
+          </t>
+          <figure>
+            <artwork><![CDATA[
   {
     "fingerprint": [ {
       "algorithm": "sha-256",
@@ -1267,34 +1256,33 @@
     } ]
   }
 ]]></artwork>
-            </figure>
-            <t>
-              The <spanx style="verb">fingerprint</spanx> value is an array of
-              objects.  Each object in the array contains <spanx
-              style="verb">algorithm</spanx> and <spanx
-              style="verb">digest</spanx> values, which correspond directly to
-              the algorithm and digest values in the <spanx
-              style="verb">a=fingerprint</spanx> line of the SDP <xref
-              target="RFC4572"/>.
-            </t>
-            <t>
-              Note: this structure does not need to be interpreted by the IdP or
-              the IdP proxy. It is consumed solely by the RP's browser.  The IdP
-              merely treats it as an opaque value to be attested to.  Thus, new
-              parameters can be added to the assertion without modifying the
-              IdP.
-            </t>
-            <t>
-              This object is encoded in a <xref target="RFC4627">JSON</xref>
-              string for passing to the IdP.
-            </t>
-          </section>
+          </figure>
+          <t>
+            The <spanx style="verb">fingerprint</spanx> value is an array of
+            objects.  Each object in the array contains <spanx
+            style="verb">algorithm</spanx> and <spanx
+            style="verb">digest</spanx> values, which correspond directly to
+            the algorithm and digest values in the <spanx
+            style="verb">a=fingerprint</spanx> line of the SDP <xref
+            target="RFC4572"/>.
+          </t>
+          <t>
+            This object is encoded in a <xref target="RFC4627">JSON</xref>
+            string for passing to the IdP.
+          </t>
+          <t>
+            This structure does not need to be interpreted by the IdP or the
+            IdP proxy. It is consumed solely by the RP's browser.  The IdP
+            merely treats it as an opaque value to be attested to.  Thus, new
+            parameters can be added to the assertion without modifying the
+            IdP.
+          </t>
 
           <section title="Carrying Identity Assertions">
             <t>
               Once an IdP has generated an assertion, it is attached to the SDP
-              message. This is done by adding a new a-line to the SDP, of the
-              form a=identity. The sole contents of this value are a <xref
+              message. This is done by adding a new identity attribute to the
+              SDP. The sole contents of this value are a <xref
               target="RFC4648">base-64 encoded</xref> identity assertion.  For
               example:
             </t>
@@ -1319,29 +1307,21 @@ a=sendrecv
 ]]></artwork>
             </figure>
             <t>
-              Each identity attribute should be paired (and attests to) with an
-              <spanx style="verb">a=fingerprint</spanx> attribute and therefore
-              can exist either at the session or media level.  Multiple identity
-              attributes may appear at either level, though it is RECOMMENDED
-              that implementations not do this, because it becomes very unclear
-              what security claim that they are making and the UI guidelines
-              above become unclear.  Browsers MAY choose refuse to display any
-              identity indicators in the face of multiple identity attributes
-              with different identities but SHOULD process multiple attributes
-              with the same identity as described above.
+              The identity attribute attests to all <spanx
+              style="verb">a=fingerprint</spanx> attributes in the session
+              description. It is therefore a session-level attribute.
             </t>
             <t>
               Multiple <spanx style="verb">a=fingerprint</spanx> values can be
               used to offer alternative certificates for a peer.  The <spanx
               style="verb">a=identity</spanx> attribute MUST include all
               fingerprint values that are included in <spanx
-              style="verb">a=fingerprint</spanx> lines.  This ensures that the
-              in-use certificate for a DTLS connection is in the set of
-              fingerprints returned from the IdP when verifying an assertion.
-              This MUST be enforced by an RP by ensuring that all <spanx
-              style="verb">a=fingerprint</spanx> attributes for a given media
-              section are present in the "VERIFY" response (see <xref
-              target="sec.verify-assert"/>).
+              style="verb">a=fingerprint</spanx> lines.
+            </t>
+            <t>
+              The RP browser MUST verify that the in-use certificate for a DTLS
+              connection is in the set of fingerprints returned from the IdP
+              when verifying an assertion.
             </t>
           </section>
 
@@ -1371,127 +1351,17 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             <t>
               No extensions are defined for this attribute.
             </t>
+
+            <t>
+              The identity assertion is a JSON <xref target="RFC4627"/> encoded
+              dictionary that contains two values.  The <spanx
+              style="verb">assertion</spanx> attribute contains an opaque string
+              that is consumed by the IdP.  The <spanx style="verb">idp</spanx>
+              attribute is a dictionary with one or two further values that
+              identify the IdP, as described in <xref target="sec.idp-uri"/>.
+            </t>
           </section>
         </section>
-
-        <section title="IdP Interaction Details" anchor="sec.protocol-details">
-
-          <section title="General Message Structure">
-            <t>
-              Messages between the PeerConnection object and the IdP proxy are
-              JavaScript objects, shown in examples using JSON <xref
-              target="RFC4627"/>.  For instance, the PeerConnection would
-              request a signature with the following "SIGN" message:
-            </t>
-            <figure>
-              <artwork><![CDATA[
-  {
-    "type": "SIGN",
-    "id": "1",
-    "origin": "https://calling-site.example.com",
-    "message": "012345678abcdefghijkl"
-  }
-]]></artwork>
-            </figure>
-            <t>
-              All messages MUST contain a <spanx style="verb">type</spanx> field
-              which indicates the general meaning of the message.
-            </t>
-            <t>
-              All requests from the PeerConnection object MUST contain an <spanx
-              style="verb">id</spanx> field which MUST be unique within the
-              scope of the interaction between the browser and the IdP
-              instance. Responses from the IdP proxy MUST contain the same
-              <spanx style="verb">id</spanx> in response, which allows the
-              PeerConnection to correlate requests and responses, in case there
-              are multiple requests/responses outstanding to the same proxy.
-            </t>
-            <t>
-              All requests from the PeerConnection object MUST contain an <spanx
-              style="verb">origin</spanx> field containing the origin of the JS
-              which initiated the PC (i.e., the URL of the calling site).  This
-              origin value can be used by the IdP to make access control
-              decisions. For instance, an IdP might only issue identity
-              assertions for certain calling services in the same way that some
-              IdPs require that relying Web sites have an API key before
-              learning user identity.
-            </t>
-            <t>
-              Any message-specific data is carried in a <spanx
-              style="verb">message</spanx> field.  Depending on the message
-              type, this may either be a string or any JavaScript object that
-              can be conveyed in a message channel.  This includes any object
-              that is able to be serialized to JSON.
-            </t>
-          </section>
-
-          <section title="Errors">
-            <t>
-              If an error occurs, the IdP sends a message of type "ERROR". The
-              message MAY have an "error" field containing freeform text data
-              which containing additional information about what happened. For
-              instance:
-            </t>
-            <figure title="Example error" anchor="fig.example-error">
-              <artwork><![CDATA[
-  {
-    "type": "ERROR",
-    "id": "1",
-    "error": "Signature verification failed"
-  }
-  ]]></artwork>
-            </figure>
-          </section>
-
-          <section title="IdP Proxy Setup" anchor="sec.iframe-setup">
-            <t>
-              In order to perform an identity transaction, the PeerConnection
-              must first create an IdP proxy. While the details of this are
-              specified in the W3C API document, from the perspective of this
-              specification, however, the relevant facts are:
-            </t>
-            <t>
-              <list style="symbols">
-                <t>
-                  The JS runs in the IdP's security context with the base page
-                  retrieved from the URL specified in <xref
-                  target="sec.idp-uri"/>.
-                </t>
-                <t>
-                  The usual browser sandbox isolation mechanisms MUST be
-                  enforced with respect to the IdP proxy.  The IdP cannot be
-                  provided with escalated privileges.
-                </t>
-                <t>
-                  JS running in the IdP proxy MUST be able to send and receive
-                  messages to the PeerConnection and the PC and IdP proxy are
-                  able to verify the source and destination of these messages.
-                </t>
-                <t>
-                  The IdP proxy is unable to interact with the user.  This
-                  includes the creation of popup windows and dialogs.
-                </t>
-              </list>
-            </t>
-            <t>
-              Initially the IdP proxy is in an unready state; the IdP JS must be
-              loaded and there may be several round trips to the IdP server to
-              load and prepare necessary resources.
-            </t>
-            <t>
-              When the IdP proxy is ready to receive commands, it delivers a
-              "READY" message. As this message is unsolicited, it contains only
-              the <spanx style="verb">type</spanx>:
-            </t>
-            <figure>
-              <artwork><![CDATA[
-  { "type":"READY" }
-  ]]></artwork>
-            </figure>
-            <t>
-              Once the PeerConnection object receives the ready message, it can
-              send commands to the IdP proxy.
-            </t>
 
             <section title="Determining the IdP URI" anchor="sec.idp-uri">
               <t>
@@ -1511,7 +1381,8 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                     The specific IdP protocol which the IdP is using. This is a
                     completely opaque IdP-specific string, but allows an IdP to
                     implement two protocols in parallel. This value may be the
-                    empty string.
+                    empty string.  If no value for protocol is provided, a value
+                    of "default" is used.
                   </t>
                 </list>
               </t>
@@ -1550,14 +1421,13 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
   https://example.com/.well-known/idp-proxy/example
   ]]></artwork>
               </figure>
-<!--  [[TODO: suggested by mt]]
-
-
               <t>
-                The IdP proxy MUST be prevented from redirecting or navigating
-                the IdP frame to another site.
+                The IdP MAY redirect requests to this URL, but they MUST retain
+                the "https" scheme.  This changes the effective origin of the
+                IdP, but not the domain of the identities that the IdP is
+                permitted to assert and validate.
               </t>
--->
+
               <section title="Authenticating Party">
                 <t>
                   How an AP determines the appropriate IdP domain is out of
@@ -1597,83 +1467,70 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
 
             <section title="Requesting Assertions" anchor="sec.request-assert">
               <t>
-                In order to request an assertion, the PeerConnection sends a
-                "SIGN" message.  Aside from the mandatory fields, this message
-                has a <spanx style="verb">message</spanx> field containing a
-                string.  The string contains a JSON-encoded object containing
-                certificate fingerprints but are treated as opaque from the
-                perspective of the IdP.
+                The input to identity assertion is the JSON-encoded object
+                described in <xref target="sec.jsep-binding"/> that contains the
+                set of certificate fingerprints the browser intends to use.
+                This string is treated as opaque from the perspective of the
+                IdP.
               </t>
               <t>
-                An application can optionally provide a user identifier when
-                specifying an IdP.  This value is a hint that the IdP can use to
-                select amongst multiple identities, or to avoid providing
-                assertions for unwanted identities.  The user identifier hint is
-                passed to the IdP in a <spanx style="verb">username</spanx>
-                field alongside the <spanx style="verb">message</spanx>.  The
-                <spanx style="verb">username</spanx> is a string that has no
-                meaning to any entity other than the IdP, it can contain any
-                data the IdP needs in order to correctly generate an assertion.
+                The browser also identifies the origin that the PeerConnection
+                is run in, which allows the IdP to make decisions based on who
+                is requesting the assertion.
               </t>
               <t>
-                A successful response to a "SIGN" message contains a <spanx
-                style="verb">message</spanx> field which is a JavaScript
-                dictionary consisting of two fields:
+                An application can optionally provide a user identifier hint
+                when specifying an IdP.  This value is a hint that the IdP can
+                use to select amongst multiple identities, or to avoid providing
+                assertions for unwanted identities.  The <spanx
+                style="verb">username</spanx> is a string that has no meaning to
+                any entity other than the IdP, it can contain any data the IdP
+                needs in order to correctly generate an assertion.
+              </t>
+              <t>
+                An identity assertion that is successfully provided by the IdP
+                consists of the following information:
               </t>
               <t>
                 <list style="hanging">
                   <t hangText="idp:">
-                    A dictionary containing the domain name of the provider and
-                    the protocol string.
+                    The domain name of an IdP and the protocol string.  This MAY
+                    identify a different IdP or protocol from the one that
+                    generated the assertion.
                   </t>
                   <t hangText="assertion:">
                     An opaque value containing the assertion itself. This is
-                    only interpretable by the IdP or its proxy.
+                    only interpretable by the identified IdP.
                   </t>
                 </list>
               </t>
               <t>
-                <xref target="fig.assert-request"/> shows an example
-                transaction, with the message "abcde..." (remember, the messages
-                are opaque at this layer) being signed and bound to identity
-                "ekr@example.org". In this case, the message has presumably been
-                digitally signed/MACed in some way that the IdP can later verify
-                it, but this is an implementation detail and out of scope of
-                this document. Line breaks are inserted solely for readability.
+                <xref target="fig.assert-ex"/> shows an example assertion
+                formatted as JSON.  In this case, the message has presumably
+                been digitally signed/MACed in some way that the IdP can later
+                verify it, but this is an implementation detail and out of scope
+                of this document.  Line breaks are inserted solely for
+                readability.
               </t>
 
-              <figure title="Example assertion request" anchor="fig.assert-request">
+              <figure title="Example assertion" anchor="fig.assert-ex">
                 <artwork><![CDATA[
-PeerConnection -> IdP proxy:
-  {
-    "type": "SIGN",
-    "id": "1",
-    "origin": "https://calling-service.example.com/",
-    "message": "abcdefghijklmnopqrstuvwyz",
-    "username": "bob"
-  }
-
-IdPProxy -> PeerConnection:
-  {
-    "type": "SUCCESS",
-    "id": "1",
-    "message": {
-      "idp":{
-        "domain": "example.org",
-        "protocol": "bogus"
-      },
-      "assertion": "{\"identity\":\"bob@example.org\",
-                     \"contents\":\"abcdefghijklmnopqrstuvwyz\",
-                     \"signature\":\"010203040506\"}"
-    }
-  }
+{
+  "idp":{
+    "domain": "example.org",
+    "protocol": "bogus"
+  },
+  "assertion": "{\"identity\":\"bob@example.org\",
+                 \"contents\":\"abcdefghijklmnopqrstuvwyz\",
+                 \"signature\":\"010203040506\"}"
+}
 ]]></artwork>
               </figure>
 
               <t>
-                The <spanx style="verb">message</spanx> structure is serialized
-                into JSON, <xref target="RFC4648">base64-encoded</xref>, and
-                placed in an <spanx style="verb">a=identity</spanx> attribute.
+                For use in signaling, the assertion is serialized into JSON,
+                <xref target="RFC4648">base64-encoded</xref>, and used as the
+                value of the <spanx style="verb">a=identity</spanx> attribute.
               </t>
             </section>
 
@@ -1693,114 +1550,77 @@ IdPProxy -> PeerConnection:
                 assertion.
               </t>
               <t>
-                An IdP proxy is unable to generate an assertion if the user is not
-                logged in, or the IdP wants to interact with the user to acquire
-                more information before generating the assertion.  If the IdP
-                wants to interact with the user before generating an assertion,
-                the IdP proxy can respond with a "LOGINNEEDED" message.
-              </t>
-              <figure title="User interaction needed response" anchor="fig.loginneeded-response">
-                <artwork><![CDATA[
-IdPProxy -> PeerConnection:
-  {
-    "type": "LOGINNEEDED",
-    "id": "1",
-    "error": "...a message explaining the reason for failure...",
-    "loginUrl": "https://example.org/login?context=e982606f4fd5"
-  }
-]]></artwork>
-              </figure>
-              <t>
-                The <spanx style="verb">loginUrl</spanx> field of the
-                "LOGINNEEDED" response contains a URL.  The PeerConnection
-                provides an error event (or similar) to the calling site that
-                includes this URL.
+                An IdP proxy is unable to generate an assertion if the user is
+                not logged in, or the IdP wants to interact with the user to
+                acquire more information before generating the assertion.  If
+                the IdP wants to interact with the user before generating an
+                assertion, the IdP proxy can fail to generate an assertion and
+                instead indicate a URL where login should proceed.
               </t>
               <t>
-                A calling site is then able to load the provided URL in an IFRAME
-                in order to trigger the required user interactions.  Once any user
-                interactions are complete, the IFRAME MUST send a <xref
-                target="WebMessaging">postMessage</xref> to its containing window
-                indicating completion.  Any message is sufficient for this
-                purpose, the <spanx style="verb">source</spanx> parameter
-                identifies the originating IFRAME.
-              </t>
-              <t>
-                In all other respects, "LOGINNEEDED" can be treated as an
-                "ERROR" message.
+                A calling site is then able to load the provided URL in an
+                IFRAME in order to trigger the required user interactions.  Once
+                any user interactions are complete, the IFRAME MUST send a <xref
+                target="WebMessaging">postMessage</xref> to the calling site
+                indicating that login has completed.  Any message is sufficient
+                for this purpose, the <spanx style="verb">source</spanx>
+                parameter identifies the originating IFRAME.
               </t>
             </section>
           </section>
 
           <section title="Verifying Assertions" anchor="sec.verify-assert">
               <t>
-                In order to verify an assertion, an RP sends a "VERIFY" message
-                to the IdP proxy containing the assertion supplied by the AP in
-                the <spanx style="verb">message</spanx> field.
+                The input to identity validation is the assertion string taken
+                from a decoded a=identity attribute.
               </t>
               <t>
                 The IdP proxy verifies the assertion. Depending on the identity
                 protocol, the proxy might contact the IdP server or other
                 servers.  For instance, an OAuth-based protocol will likely
-                require using the IdP as an oracle, whereas with BrowserID the
-                IdP proxy can likely verify the signature on the assertion
+                require using the IdP as an oracle, whereas with a
+                signature-based scheme might be able to verify the assertion
                 without contacting the IdP, provided that it has cached the
-                IdP's public key.
+                relevant public key.
               </t>
               <t>
                 Regardless of the mechanism, if verification succeeds, a
-                successful response from the IdP proxy MUST contain a message
-                field consisting of a object with the following fields:
+                successful response from the IdP proxy consists of the following
+                information:
                 <list style="hanging">
                   <t hangText="identity:">
                     The identity of the AP from the IdP's perspective. Details
                     of this are provided in <xref target="sec.id-format"/>.
                   </t>
                   <t hangText="contents:">
-                    The original unmodified string provided by the AP in the
-                    original SIGN request.
+                    The original unmodified string provided by the AP as input
+                    to the assertion generation process.
                   </t>
                 </list>
               </t>
               <t>
-                <xref target="fig.verify-request"/> shows an example
-                transaction. Line breaks are inserted solely for readability.
+                <xref target="fig.verify-ex"/> shows an example response
+                formatted as JSON for illustrative purposes.
               </t>
 
-              <figure title="Example verification request" anchor="fig.verify-request">
+              <figure title="Example verification result" anchor="fig.verify-ex">
                 <artwork>
                   <![CDATA[
-PeerConnection -> IdP Proxy:
-  {
-    "type": "VERIFY",
-    "id": 2,
-    "origin": "https://calling-service.example.com/",
-    "message": "{\"identity\":\"bob@example.org\",
-                 \"contents\":\"abcdefghijklmnopqrstuvwyz\",
-                 \"signature\":\"010203040506\"}"
-  }
-
-IdP Proxy -> PeerConnection:
-  {
-    "type": "SUCCESS",
-    "id": 2,
-    "message": {
-      "identity": "bob@example.org",
-      "contents": "abcdefghijklmnopqrstuvwyz"
-    }
-  }
+{
+  "identity": "bob@example.org",
+  "contents": "{\"fingerprint\":[ ... ]}"
+}
 ]]></artwork>
               </figure>
 
               <section title="Identity Formats" anchor="sec.id-format">
                 <t>
-                  Identities passed from the IdP proxy to the PeerConnection are
-                  passed in the <spanx style="verb">identity</spanx> field. This
-                  field MUST consist of a string representing the user's
-                  identity.  This string is in the form "&lt;user>@&lt;domain>",
-                  where <spanx style="verb">user</spanx> consists of any
-                  character except '@', and domain is an <xref
-                  target="RFC5890">internationalized domain name</xref>.
+                  The identity provided from the IdP to the RP browser MUST
+                  consist of a string representing the user's identity.  This
+                  string is in the form "&lt;user>@&lt;domain>", where <spanx
+                  style="verb">user</spanx> consists of any character except
+                  '@', and domain is an <xref target="RFC5890">internationalized
+                  domain name</xref>.
                 </t>
                 <t>
                   The PeerConnection API MUST check this string as follows:
@@ -1823,14 +1643,14 @@ IdP Proxy -> PeerConnection:
                         </t>
                         <t>
                           local policy is configured to trust this IdP domain
-                          for the RHS of the identity string.
+                          for the domain portion of the identity string.
                         </t>
                       </list>
                     </t>
                   </list>
                 </t>
                 <t>
-                  Sites which have identities that do not fit into the RFC822
+                  Sites that have identities that do not fit into the RFC822
                   style (for instance, identifiers that are simple numeric
                   values, or values that contain '@' characters) SHOULD convert
                   them to this form by escaping illegal characters and appending
@@ -1841,8 +1661,6 @@ IdP Proxy -> PeerConnection:
 
             </section>
           </section>
-        </section>
-      </section>
 
       <section title="Security Considerations" anchor="sec.sec-cons">
         <t>
@@ -2163,7 +1981,7 @@ IdP Proxy -> PeerConnection:
           </list>
         </t>
       </section>
-      
+
     <section title="Acknowledgements">
       <t>
         Bernard Aboba, Harald Alvestrand, Richard Barnes, Dan Druta, Cullen
