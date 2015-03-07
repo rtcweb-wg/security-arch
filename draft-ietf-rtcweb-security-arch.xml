@@ -1991,6 +1991,15 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
     </section>
 
     <section title="Changes">
+      <section title="Changes since -10">
+        <t>
+          Update cipher suite profiles.
+        </t>
+        <t>
+          Rework IdP interaction based on implementation experience in
+          Firefox.
+        </t>
+      </section>
 
       <section title="Changes since -06">
         <t>
