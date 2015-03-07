@@ -882,8 +882,9 @@
           TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA and the DTLS-SRTP protection
           profile SRTP_AES128_CM_HMAC_SHA1_80. Implementations SHOULD implement
           DTLS 1.2 with the TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 cipher suite.
-          Implementations SHOULD favor cipher suites which support PFS over
-          non-PFS cipher suites and GCM over CBC cipher suites.  [[OPEN ISSUE:
+          Implementations MUST favor cipher suites which support PFS over
+          non-PFS cipher suites and SHOULD favor
+          AEAD over non-AEAD cipher suites.  [[OPEN ISSUE:
           Should we require ECDSA? Waiting for WG Consensus.]]
         </t>
         <!-- OPEN ISSUE: DTLS-SRTP key origin scoping? -->
