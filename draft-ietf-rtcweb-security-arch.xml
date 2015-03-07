@@ -1425,7 +1425,8 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                 The IdP MAY redirect requests to this URL, but they MUST retain
                 the "https" scheme.  This changes the effective origin of the
                 IdP, but not the domain of the identities that the IdP is
-                permitted to assert and validate.
+                permitted to assert and validate. I.e., the IdP is still
+                regarded as authoritative for the original domain.
               </t>
 
               <section title="Authenticating Party">
@@ -1500,7 +1501,8 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                   </t>
                   <t hangText="assertion:">
                     An opaque value containing the assertion itself. This is
-                    only interpretable by the identified IdP.
+                    only interpretable by the identified IdP or the IdP code
+                    running in the client.
                   </t>
                 </list>
               </t>
