@@ -878,13 +878,13 @@
           All data channels MUST be secured via DTLS.
         </t>
         <t>
-          All implementations MUST implement both DTLS 1.2 and DTLS
-          1.0, with the cipher suites TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 and
-          TLS_DHE_RSA_WITH_AES_128_CBC_SHA and the DTLS-SRTP protection profile
-          SRTP_AES128_CM_HMAC_SHA1_80. Implementations SHOULD favor cipher
-          suites which support PFS over non-PFS cipher suites and GCM over
-          CBC cipher suites.
-          [[OPEN ISSUE: Should we require ECDHE? Waiting for TLS WG Consensus.]]
+          All implementations MUST implement DTLS 1.0, with the cipher suite
+          TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA and the DTLS-SRTP protection
+          profile SRTP_AES128_CM_HMAC_SHA1_80. Implementations SHOULD implement
+          DTLS 1.2 with the TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 cipher suite.
+          Implementations SHOULD favor cipher suites which support PFS over
+          non-PFS cipher suites and GCM over CBC cipher suites.  [[OPEN ISSUE:
+          Should we require ECDSA? Waiting for WG Consensus.]]
         </t>
         <!-- OPEN ISSUE: DTLS-SRTP key origin scoping? -->
         <t>
@@ -2163,7 +2163,7 @@ IdP Proxy -> PeerConnection:
           </list>
         </t>
       </section>
-      
+
     <section title="Acknowledgements">
       <t>
         Bernard Aboba, Harald Alvestrand, Richard Barnes, Dan Druta, Cullen
