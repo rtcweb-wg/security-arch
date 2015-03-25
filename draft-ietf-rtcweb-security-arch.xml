@@ -637,26 +637,6 @@
         <t>
           <list style="hanging">
             <t hangText="API Requirement:">
-              The API MUST provide a mechanism for the requesting JS to indicate
-              which of these forms of permissions it is requesting. This allows
-              the browser client to know what sort of user interface experience
-              to provide to the user, including what permissions to request from
-              the user and hence what to enforce later.  For instance, browsers
-              might display a non-invasive door hanger ("some features of this
-              site may not work..." when asking for long-term permissions) but a
-              more invasive UI ("here is your own video") for single-call
-              permissions. The API MAY grant weaker permissions than the JS
-              asked for if the user chooses to authorize only those permissions,
-              but if it intends to grant stronger ones it SHOULD display the
-              appropriate UI for those permissions and MUST clearly indicate
-              what permissions are being requested.
-            </t>
-          </list>
-        </t>
-
-        <t>
-          <list style="hanging">
-            <t hangText="API Requirement:">
               The API MUST provide a mechanism for the requesting JS to
               relinquish the ability to see or modify the media (e.g., via
               MediaStream.record()).  Combined with secure authentication of the
