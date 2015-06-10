@@ -885,24 +885,24 @@
           Implementations MUST favor cipher suites which support PFS over
           non-PFS cipher suites and SHOULD favor AEAD over non-AEAD cipher suites.
         </t>
-        <!-- OPEN ISSUE: DTLS-SRTP key origin scoping? -->
+
         <t>
           <list style="hanging">
             <t hangText="API Requirement:">
-              The API MUST provide a mechanism to indicate that a fresh DTLS key
-              pair is to be generated for a specific call.  This is intended to
-              allow for unlinkability. Note that there are also settings where
-              it is attractive to use the same keying material repeatedly,
-              especially those with key continuity-based authentication.  Unless
+              The API MUST generate a new authentication key pair for every new
+              call by default.  This is intended to allow for unlinkability.
+            </t>
+            <t hangText="API Requirement:">
+              The API MUST provide a means to reuse a key pair for calls.  This
+              can be used to enable key continuity-based authentication, and
+              could be used to amortize key generation costs.
+            </t>
+            <t hangText="API Requirement:">
+              Unless
               the user specifically configures an external key pair, different
               key pairs MUST be used for each origin. (This avoids creating a
               super-cookie.)
             </t>
-          </list>
-        </t>
-
-        <t>
-          <list style="hanging">
             <t hangText="API Requirement:">
               When DTLS-SRTP is used, the API MUST NOT permit the JS to obtain
               the negotiated keying material. This requirement preserves the
