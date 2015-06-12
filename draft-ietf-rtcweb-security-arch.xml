@@ -879,11 +879,13 @@
         </t>
         <t>
           All implementations MUST implement DTLS 1.0, with the cipher suite
-          TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA and the DTLS-SRTP protection
-          profile SRTP_AES128_CM_HMAC_SHA1_80. Implementations SHOULD implement
-          DTLS 1.2 with the TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite.
-          Implementations MUST favor cipher suites which support PFS over
-          non-PFS cipher suites and SHOULD favor AEAD over non-AEAD cipher suites.
+          TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA with the the <xref
+          target="FIPS186">P-256 curve</xref>.  The DTLS-SRTP protection profile
+          SRTP_AES128_CM_HMAC_SHA1_80 MUST be supported for
+          SRTP. Implementations SHOULD implement DTLS 1.2 with the
+          TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite.  Implementations
+          MUST favor cipher suites which support PFS over non-PFS cipher suites
+          and SHOULD favor AEAD over non-AEAD cipher suites.
         </t>
 
         <t>
@@ -1215,7 +1217,7 @@
               <t>
                 The precise information from the signaling message that must be
                 cryptographically bound to the user's identity and a mechanism
-                for carrying assertions in JSEP messages. This is specified in 
+                for carrying assertions in JSEP messages. This is specified in
                 <xref target="sec.jsep-binding"/>.
               </t>
 
@@ -2156,14 +2158,15 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
         http://dev.w3.org/2011/webrtc/editor/webrtc.html</annotation>
       </reference>
 
-      <reference anchor="WebMessaging" target="http://www.w3.org/TR/2012/CR-webmessaging-20120501/">
+      <reference anchor="FIPS186">
         <front>
-          <title>HTML5 Web Messaging</title>
-          <author fullname="W3C editors" surname="Hickson">
-            <organization>W3C</organization>
+          <title>Digital Signature Standard (DSS)</title>
+          <author >
+            <organization>National Institute of Standards and Technology (NIST)</organization>
           </author>
-          <date day="1" month="May" year="2012"/>
+          <date year="2013" month="July"/>
         </front>
+        <seriesInfo name="NIST PUB 186-4" value=""/>
       </reference>
 
     </references>
