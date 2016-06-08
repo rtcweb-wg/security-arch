@@ -73,7 +73,7 @@
       </address>
     </author>
 
-    <date year="2017" />
+    <date/>
 
     <area>ART</area>
 
@@ -603,7 +603,7 @@
         <t>
           Because HTTP origins cannot be securely established against network
           attackers, implementations MUST NOT allow the setting of permanent
-          access permissions for HTTP origins. Implementations MUST 
+          access permissions for HTTP origins. Implementations MUST
           refuse all permissions grants for HTTP origins.
         </t>
         <t>
@@ -706,7 +706,7 @@
             </t>
           </list>
         </t>
-        
+
         <t>
           Clients MAY permit the formation of data channels without any direct
           user approval. Because sites can always tunnel data through the
@@ -986,7 +986,7 @@
           party which is being authenticated is NOT the signaling site but
           rather the user (and their browser). Similarly, the relying party is
           the browser and not the signaling site.  Thus, the browser MUST
-          generate the input to the IdP assertion process and 
+          generate the input to the IdP assertion process and
           display the results of the verification process to the user
           in a way which cannot be imitated by the calling site.
         </t>
