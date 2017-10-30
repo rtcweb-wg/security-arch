@@ -854,6 +854,7 @@
           NOT negotiate cipher suites with NULL encryption modes.  DTLS-SRTP
           MUST be offered for every media channel.  WebRTC implementations MUST NOT
           offer SDP Security Descriptions <xref target="RFC4568"/> or select it if offered.
+          A SRTP MKI MUST NOT be used.
         </t>
         <t>
           All data channels MUST be secured via DTLS.
@@ -868,6 +869,10 @@
           MUST favor cipher suites which support PFS over non-PFS cipher suites
           and SHOULD favor AEAD over non-AEAD cipher suites.
         </t>
+
+        <t>
+          Implementations MUST NOT implement DTLS renegotiation and MUST reject
+          it with a "no_renegotiation" alert if offered.</t>
 
         <t>
           <list style="hanging">
