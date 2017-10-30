@@ -12,7 +12,7 @@
 <!ENTITY RFC4347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4347.xml">
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
 <!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
-<!ENTITY RFC4572 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4572.xml">
+<!ENTITY RFC8122 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8122.xml">
 <!ENTITY RFC4627 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4627.xml">
 <!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
 <!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
@@ -1239,7 +1239,7 @@
             style="verb">digest</spanx> values, which correspond directly to
             the algorithm and digest values in the <spanx
             style="verb">a=fingerprint</spanx> line of the SDP <xref
-            target="RFC4572"/>.
+            target="RFC8122"/>.
           </t>
           <t>
             This object is encoded in a <xref target="RFC4627">JSON</xref>
@@ -2083,7 +2083,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC4347;
       &RFC4566;
       &RFC4568;
-      &RFC4572;
+      &RFC8122;
       &RFC4627;
       &RFC4648;
       &RFC5234;
