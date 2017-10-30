@@ -849,8 +849,8 @@
           target="I-D.ietf-tsvwg-sctp-dtls-encaps"/>.
         </t>
         <t>
-          All media channels MUST be secured via SRTP.  Media traffic MUST NOT
-          be sent over plain (unencrypted) RTP; that is, implementations MUST
+          All media channels MUST be secured via SRTP and SRTCP.  Media traffic MUST NOT
+          be sent over plain (unencrypted) RTP or RTCP; that is, implementations MUST
           NOT negotiate cipher suites with NULL encryption modes.  DTLS-SRTP
           MUST be offered for every media channel.  WebRTC implementations MUST NOT
           offer SDP Security Descriptions <xref target="RFC4568"/> or select it if offered.
