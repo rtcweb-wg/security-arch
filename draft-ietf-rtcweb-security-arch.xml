@@ -81,10 +81,9 @@
 
     <abstract>
       <t>
-        The Real-Time Communications on the Web (RTCWEB) working group is tasked
-        with standardizing protocols for enabling real-time communications
-        within user-agents using web technologies (commonly called
-        "WebRTC"). This document defines the security architecture for WebRTC.
+        This document defines the security architecture for WebRTC, a protocol
+        suite intended for use with real-time applications that can be deployed
+        in browsers - "real time communication on the Web".
       </t>
     </abstract>
   </front>
