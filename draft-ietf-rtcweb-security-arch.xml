@@ -501,8 +501,8 @@
         <t>
           Once the ICE checks have completed [more specifically, once some ICE
           checks have completed], Alice and Bob can set up a secure channel or
-          channels. This is performed via DTLS <xref target="RFC4347"/> (for the
-          data channel) and DTLS-SRTP <xref target="RFC5763"/> keying for SRTP
+          channels. This is performed via DTLS <xref target="RFC4347"/>
+          and DTLS-SRTP <xref target="RFC5763"/> keying for SRTP
           <xref target="RFC3711"/> for the media channel and SCTP over DTLS
           <xref target="I-D.ietf-tsvwg-sctp-dtls-encaps"/> for data
           channels. Specifically, Alice and Bob perform a DTLS handshake on
