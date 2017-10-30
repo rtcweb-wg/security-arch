@@ -1634,22 +1634,16 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
 
         <section title="Communications Security">
           <t>
-            While this document favors DTLS-SRTP, it permits a variety of
-            communications security mechanisms and thus the level of
-            communications security actually provided varies considerably. Any
-            pair of implementations which have multiple security mechanisms in
-            common are subject to being downgraded to the weakest of those
-            common mechanisms by any attacker who can modify the signaling
-            traffic. If communications are over HTTP, this means any on-path
-            attacker. If communications are over HTTPS, this means the signaling
-            server. Implementations which wish to avoid downgrade attack should
-            only offer the strongest available mechanism, which is
-            DTLS/DTLS-SRTP.  Note that the implication of this choice will be
-            that interop to non-DTLS-SRTP devices will need to happen through
-            gateways.
-          </t>
+            IF HTTPS is not used to secure communications to the signaling
+            server, and the identity mechanism used in
+            <xref target="sec.generic.idp"/> is not used,
+            then any on-path attacker can replace the DTLS-SRTP fingerprints
+            in the handshake and thus substitute its own identity for that
+            of either endpoint.
           <t>
-            Even if only DTLS/DTLS-SRTP are used, the signaling server can
+
+          </t>
+            Even if HTTPS is used, the signaling server can
             potentially mount a man-in-the-middle attack unless implementations
             have some mechanism for independently verifying keys. The UI
             requirements in <xref target="sec.proposal.comsec"/> are designed to
