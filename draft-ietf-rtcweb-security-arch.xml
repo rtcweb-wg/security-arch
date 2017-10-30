@@ -184,9 +184,7 @@
         Optimally, we would not rely on trust in any entities other than the
         browser. However, this is unfortunately not possible if we wish to have
         a functional system.  Other network elements fall into two categories:
-        those which can be authenticated by the browser and thus are partly
-        trusted--though to the minimum extent necessary--and those which cannot
-        be authenticated and thus are untrusted.
+        those which can be authenticated by the browser and thus can be granted permissions to access sensitive resources, and those which cannot be authenticated and thus are untrusted.
       </t>
 
       <section title="Authenticated Entities" anchor="sec.proposal.authenticated">
@@ -221,13 +219,6 @@
           first identify other elements before we can determine whether and how
           much to trust them. Additionally, sometimes we need to identify the
           communicating peer before we know what policies to apply.
-        </t>
-        <t>
-          It's also worth noting that there are settings where authentication is
-          non-cryptographic, such as other machines behind a
-          firewall. Naturally, the level of trust one can have in identities
-          verified in this way depends on how strong the topology enforcement
-          is.
         </t>
 
       </section>
@@ -265,8 +256,8 @@
         figures below. This topology is derived from the topology shown in <xref
         target="fig.simple"/>, but separates Alice and Bob's identities from the
         process of signaling.  Specifically, Alice and Bob have relationships
-        with some Identity Provider (IdP) that supports a protocol such as
-        OpenID or BrowserID) that can be used to demonstrate their identity to
+        with some Identity Provider (IdP) that supports a protocol (such as
+        OpenID Connect) that can be used to demonstrate their identity to
         other parties. For instance, Alice might have an account with a social
         network which she can then use to authenticate to other web sites
         without explicitly having an account with those sites; this is a fairly
@@ -373,7 +364,7 @@
           so know the origin with some level of confidence. They also have
           accounts with some identity provider.  This sort of identity service
           is becoming increasingly common in the Web environment (with technologies
-          such as BrowserID, Federated Google Login, Facebook Connect, OAuth,
+          such as Federated Google Login, Facebook Connect, OAuth,
           OpenID, WebFinger), and is often provided as a side effect service of
           a user's ordinary accounts with some service. In this example, we show
           Alice and Bob using a separate identity service, though the identity
@@ -427,7 +418,7 @@
           identity to her fingerprint. The exact details depend on the identity
           service (though as discussed in <xref target="sec.generic.idp"/>
           PeerConnection can be agnostic to them), but for now it's easiest to
-          think of as a BrowserID assertion.  The assertion may bind other
+          think of as an OAuth token.  The assertion may bind other
           information to the identity besides the fingerprint, but at minimum it
           needs to bind the fingerprint.
         </t>
@@ -612,9 +603,8 @@
         <t>
           Because HTTP origins cannot be securely established against network
           attackers, implementations MUST NOT allow the setting of permanent
-          access permissions for HTTP origins. Implementations MAY also opt to
-          refuse all permissions grants for HTTP origins, but it is RECOMMENDED
-          that currently they support one-time camera/microphone access.
+          access permissions for HTTP origins. Implementations MUST 
+          refuse all permissions grants for HTTP origins.
         </t>
         <t>
           In addition, they SHOULD support requests for access that promise that
@@ -694,13 +684,6 @@
         </t>
 
         <t>
-          [[OPEN ISSUE: This section does not have WG consensus.  Because
-          screen/application sharing presents a more significant risk than
-          camera and microphone access (see the discussion in <xref
-          target="I-D.ietf-rtcweb-security"/> S 4.1.1), we require a higher
-          level of user consent.
-        </t>
-        <t>
           <list style="symbols">
             <t>
               Browsers MUST not permit permanent screen or application sharing
@@ -723,9 +706,7 @@
             </t>
           </list>
         </t>
-        <t>
-          -- END OF OPEN ISSUE]]
-        </t>
+        
         <t>
           Clients MAY permit the formation of data channels without any direct
           user approval. Because sites can always tunnel data through the
@@ -800,7 +781,7 @@
           site to cooperate with the user to hide the user's IP address from the
           other side of the call. Hiding the user's IP address from the server
           requires some sort of explicit privacy preserving mechanism on the
-          client (e.g., Torbutton [https://www.torproject.org/torbutton/]) and
+          client (e.g., Tor Browser [https://www.torproject.org/projects/torbrowser.html.en]) and
           is out of scope for this specification.
         </t>
 
@@ -938,13 +919,6 @@
                 </t>
 
                 <t>
-                  The "security characteristics" MUST include an indication as
-                  to whether the cryptographic keys were delivered out-of-band
-                  (from a server) or were generated as a result of a pairwise
-                  negotiation.
-                </t>
-
-                <t>
                   If the far endpoint was directly verified, either via a
                   third-party verifiable X.509 certificate or via a Web IdP
                   mechanism (see <xref target="sec.generic.idp"/>) the "security
@@ -998,7 +972,7 @@
         </t>
         <t>
           Recently, a number of Web-based identity technologies (OAuth,
-          BrowserID, Facebook Connect etc.) have been developed. While the
+          Facebook Connect etc.) have been developed. While the
           details vary, what these technologies share is that they have a
           Web-based (i.e., HTTP/HTTPS) identity provider which attests to your
           identity. For instance, if I have an account at example.org, I could
@@ -1012,8 +986,8 @@
           party which is being authenticated is NOT the signaling site but
           rather the user (and their browser). Similarly, the relying party is
           the browser and not the signaling site.  Thus, the browser MUST
-          securely generate the input to the IdP assertion process and MUST
-          securely display the results of the verification process to the user
+          generate the input to the IdP assertion process and 
+          display the results of the verification process to the user
           in a way which cannot be imitated by the calling site.
         </t>
         <t>
@@ -2200,184 +2174,10 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       <t>
         This section provides some examples of how the mechanisms described in
         this document could be used with existing authentication protocols such
-        as BrowserID or OAuth. Note that this does not require browser-level
+        as OAuth. Note that this does not require browser-level
         support for either protocol.  Rather, the protocols can be fit into the
-        generic framework. (Though BrowserID in particular works better with
-        some client side support).
+        generic framework.
       </t>
-
-      <section title="BrowserID">
-        <t>
-          BrowserID [https://browserid.org/] is a technology which allows a user
-          with a verified email address to generate an assertion (authenticated
-          by their identity provider) attesting to their identity (phrased as an
-          email address).  The way that this is used in practice is that the
-          relying party embeds JS in their site which talks to the BrowserID
-          code (either hosted on a trusted intermediary or embedded in the
-          browser). That code generates the assertion which is passed back to
-          the relying party for verification.  The assertion can be verified
-          directly or with a Web service provided by the identity provider.
-          It's relatively easy to extend this functionality to authenticate
-          WebRTC calls, as shown below.
-        </t>
-        <figure>
-          <artwork><![CDATA[
-+----------------------+                     +----------------------+
-|                      |                     |                      |
-|    Alice's Browser   |                     |     Bob's Browser    |
-|                      | OFFER ------------> |                      |
-|   Calling JS Code    |                     |    Calling JS Code   |
-|          ^           |                     |          ^           |
-|          |           |                     |          |           |
-|          v           |                     |          v           |
-|    PeerConnection    |                     |    PeerConnection    |
-|       |      ^       |                     |       |      ^       |
-| Finger|      |Signed |                     |Signed |      |       |
-| print |      |Finger |                     |Finger |      |"Alice"|
-|       |      |print  |                     |print  |      |       |
-|       v      |       |                     |       v      |       |
-|   +--------------+   |                     |   +---------------+  |
-|   |  IdP Proxy   |   |                     |   |  IdP Proxy    |  |
-|   |     to       |   |                     |   |     to        |  |
-|   |  BrowserID   |   |                     |   |  BrowserID    |  |
-|   |  Signer      |   |                     |   |  Verifier     |  |
-|   +--------------+   |                     |   +---------------+  |
-|           ^          |                     |          ^           |
-+-----------|----------+                     +----------|-----------+
-            |                                           |
-            | Get certificate                           |
-            v                                           | Check
-+----------------------+                                | certificate
-|                      |                                |
-|       Identity       |/-------------------------------+
-|       Provider       |
-|                      |
-+----------------------+
-]]></artwork>
-        </figure>
-        <t>
-          The way this mechanism works is as follows. On Alice's side, Alice
-          goes to initiate a call.
-        </t>
-        <t>
-          <list style="numbers">
-            <t>
-              The calling JS instantiates a PeerConnection and tells it that it
-              is interested in having it authenticated via BrowserID (i.e., it
-              provides "browserid.org" as the IdP name.)
-            </t>
-            <t>
-              The PeerConnection instantiates the BrowserID signer in the IdP
-              proxy
-            </t>
-            <t>
-              The BrowserID signer contacts Alice's identity provider,
-              authenticating as Alice (likely via a cookie).
-            </t>
-            <t>
-              The identity provider returns a short-term certificate attesting
-              to Alice's identity and her short-term public key.
-            </t>
-            <t>
-              The Browser-ID code signs the fingerprint and returns the signed
-              assertion + certificate to the PeerConnection.
-            </t>
-            <t>
-              The PeerConnection returns the signed information to the calling
-              JS code.
-            </t>
-            <t>
-              The signed assertion gets sent over the wire to Bob's browser (via
-              the signaling service) as part of the call setup.
-            </t>
-          </list>
-        </t>
-        <t>
-          The offer might look something like:
-        </t>
-        <figure>
-          <artwork><![CDATA[
-   {
-     "type":"OFFER",
-     "sdp":
-  "v=0\n
-   o=- 2890844526 2890842807 IN IP4 192.0.2.1\n
-   s= \n
-   c=IN IP4 192.0.2.1\n
-   t=2873397496 2873404696\n
-   a=fingerprint:SHA-1 ...\n
-   4A:AD:B9:B1:3F:82:18:3B:54:02:12:DF:3E:5D:49:6B:19:E5:7C:AB\n
-   a=identity [[base-64 encoding of identity assertion:
-     {
-       "idp":{     // Standardized
-         "domain":"browserid.org",
-         "method":"default"
-       },
-       // Assertion contents are browserid-specific
-       "assertion": "{
-           \"assertion\": {
-             \"digest\":\"<hash of the SIGN message>\",
-             \"audience\": \"<audience>\"
-             \"valid-until\": 1308859352261,
-           },
-           \"certificate\": {
-             \"email\": \"rescorla@example.org\",
-             \"public-key\": \"<ekrs-public-key>\",
-             \"valid-until\": 1308860561861,
-             \"signature\": \"<signature from example.org>\"
-           },
-           \"content\": \"<content of the SIGN message>\"
-       }"
-     }
-   ]]\n
-   m=audio 49170 RTP/AVP 0\n
-   ..."
-}
-]]></artwork>
-        </figure>
-        <t>
-          <!-- [TODO: Need to talk about Audience a bit.] -->
-          Note that while the IdP here is specified as "browserid.org",
-          the actual certificate is signed by example.org. This is because
-          BrowserID is a combined authoritative/third-party system in
-          which browserid.org delegates the right to be authoritative
-          (what BrowserID calls primary) to individual domains.
-        </t>
-        <t>
-          On Bob's side, he receives the signed assertion as part of the call
-          setup message and a similar procedure happens to verify it.
-        </t>
-        <t>
-          <list style="numbers">
-            <t>
-              The calling JS instantiates a PeerConnection and provides it the
-              relevant signaling information, including the signed assertion.
-            </t>
-            <t>
-              The PeerConnection instantiates the IdP proxy which examines the
-              IdP name and brings up the BrowserID verification code.
-            </t>
-            <t>
-              The BrowserID verifier contacts the identity provider to verify
-              the certificate and then uses the key to verify the signed
-              fingerprint.
-            </t>
-            <t>
-              Alice's verified identity is returned to the PeerConnection (it
-              already has the fingerprint).
-            </t>
-            <t>
-              At this point, Bob's browser can display a trusted UI indication
-              that Alice is on the other end of the call.
-            </t>
-          </list>
-        </t>
-        <t>
-          When Bob returns his answer, he follows the converse procedure, which
-          provides Alice with a signed assertion of Bob's identity and keying
-          material.
-        </t>
-      </section>
 
       <section title="OAuth">
         <t>
