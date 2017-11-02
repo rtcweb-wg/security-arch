@@ -1802,7 +1802,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               by the browser, so nothing stops a Web attacker from creating
               their own IFRAME, loading the IdP proxy HTML/JS, and requesting a
               signature. In order to prevent this attack, we require that all
-              signatures be tied to a specific origin ("rtcweb://...") which
+              signatures be tied to a specific origin which
               cannot be produced by content JavaScript. Thus, while an attacker
               can instantiate the IdP proxy, they cannot send messages from an
               appropriate origin and so cannot create acceptable
