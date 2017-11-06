@@ -27,7 +27,7 @@
 <!ENTITY RFC6265 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
 <!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
 <!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6455.xml">
-<!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
+<!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
 
 <!ENTITY I-D.ietf-avtcore-6222bis SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-avtcore-6222bis.xml">
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
@@ -544,7 +544,7 @@
           Because the consent issue is more difficult here, we require WebRTC
           implementations to periodically send keepalives.  As described in
           Section 5.3, these keepalives MUST be based on the consent freshness
-          mechanism specified in <xref target="RFC7675">RFC 7675</xref>.  If a
+          mechanism specified in <xref target="RFC7675"/>.  If a
           keepalive fails and no new ICE channels can be established, then the
           session is terminated.
         </t>
@@ -743,8 +743,7 @@
           use ICE Binding Requests for continuing consent freshness. ICE already
           requires that implementations respond to such requests, so this
           approach is maximally compatible. A separate document will profile the
-          ICE timers to be used; see <xref
-          target="I-D.muthu-behave-consent-freshness"/>.
+          ICE timers to be used; see <xref target="RFC7675"/>.
         </t>
       </section>
 
