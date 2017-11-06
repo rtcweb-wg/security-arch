@@ -2071,7 +2071,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC5785;
       &RFC5890;
       &RFC6454;
-      &RFC7675
+      &RFC7675;
 
       &I-D.ietf-rtcweb-security;
       &I-D.ietf-avtcore-6222bis;
