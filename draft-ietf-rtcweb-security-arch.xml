@@ -1640,7 +1640,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             then any on-path attacker can replace the DTLS-SRTP fingerprints
             in the handshake and thus substitute its own identity for that
             of either endpoint.
-          <t>
+          </t>
 
           </t>
             Even if HTTPS is used, the signaling server can
