@@ -27,12 +27,12 @@
 <!ENTITY RFC6265 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
 <!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
 <!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6455.xml">
+<!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7022.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
+<!ENTITY RFC8261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8261.xml">
 
-<!ENTITY I-D.ietf-avtcore-6222bis SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-avtcore-6222bis.xml">
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
-<!ENTITY I-D.ietf-tsvwg-sctp-dtls-encaps SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tsvwg-sctp-dtls-encaps.xml">
 <!ENTITY I-D.ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-rtp-usage.xml">
 ]>
 
@@ -503,7 +503,7 @@
           channels. This is performed via DTLS <xref target="RFC4347"/>
           and DTLS-SRTP <xref target="RFC5763"/> keying for SRTP
           <xref target="RFC3711"/> for the media channel and SCTP over DTLS
-          <xref target="I-D.ietf-tsvwg-sctp-dtls-encaps"/> for data
+          <xref target="RFC8261"/> for data
           channels. Specifically, Alice and Bob perform a DTLS handshake on
           every channel which has been established by ICE. The total number of
           channels depends on the amount of muxing; in the most likely case we
@@ -824,7 +824,7 @@
           Implementations MUST implement DTLS <xref target="RFC4347"/> and
           DTLS-SRTP <xref target="RFC5763"/><xref target="RFC5764"/> for SRTP
           keying. Implementations MUST implement <xref
-          target="I-D.ietf-tsvwg-sctp-dtls-encaps"/>.
+          target="RFC8261"/>.
         </t>
         <t>
           All media channels MUST be secured via SRTP and SRTCP.  Media traffic MUST NOT
@@ -1716,7 +1716,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             DTLS keys for each call and also to use TURN throughout the
             call. Otherwise, the other side will learn linkable information.
             Additionally, browsers SHOULD implement the privacy-preserving CNAME
-            generation mode of <xref target="I-D.ietf-avtcore-6222bis"/>.
+            generation mode of <xref target="RFC7022"/>.
           </t>
         </section>
 
@@ -2071,11 +2071,11 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC5785;
       &RFC5890;
       &RFC6454;
+      &RFC7022;
       &RFC7675;
+      &RFC8261;
 
       &I-D.ietf-rtcweb-security;
-      &I-D.ietf-avtcore-6222bis;
-      &I-D.ietf-tsvwg-sctp-dtls-encaps;
       &I-D.ietf-rtcweb-rtp-usage;
 
       <reference anchor="webcrypto">
