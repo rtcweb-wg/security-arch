@@ -12,7 +12,7 @@
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
 <!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
 <!ENTITY RFC8122 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8122.xml">
-<!ENTITY RFC4627 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4627.xml">
+<!ENTITY RFC7159 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml">
 <!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
 <!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
 <!ENTITY RFC5245 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5245.xml">
@@ -1225,7 +1225,7 @@
             target="RFC8122"/>.
           </t>
           <t>
-            This object is encoded in a <xref target="RFC4627">JSON</xref>
+            This object is encoded in a <xref target="RFC7159">JSON</xref>
             string for passing to the IdP.
           </t>
           <t>
@@ -1311,7 +1311,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             </t>
 
             <t>
-              The identity assertion is a JSON <xref target="RFC4627"/> encoded
+              The identity assertion is a JSON <xref target="RFC7159"/> encoded
               dictionary that contains two values.  The <spanx
               style="verb">assertion</spanx> attribute contains an opaque string
               that is consumed by the IdP.  The <spanx style="verb">idp</spanx>
@@ -2061,7 +2061,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC4566;
       &RFC4568;
       &RFC8122;
-      &RFC4627;
+      &RFC7159;
       &RFC4648;
       &RFC5234;
       &RFC5245;
