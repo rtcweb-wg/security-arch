@@ -2146,40 +2146,4 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
 
     </references>
   </back>
-  <!--
-
-On Thu, Sep 22, 2011 at 5:45 AM, Magnus Westerlund <magnus.westerlund@ericsson.com> wrote:
-> Hi EKR,
->
-> (As an individual)
->
-> Thanks for posting the draft.
->
-> I am missing a few security issues that I think should be considered.
->
-> 1. The attempt to overload the links in an domain by concentrating
-> traffic on the domain by choosing peer-pairs. Not that I think there is
-> any real protection against this other than limit the flows to their
-> "fair" share.
->
-> 2. Configuring RTCP or other automatically sent traffic to high
-> bit-rates. Especially under conditions where continued consent can't be
-> determined.
->
-> Cheers
->
-> Magnus Westerlund
->
->
->
-
-
-
-  -->
-
-  <!-- TODO
-
-
-
-  -->
 </rfc>
