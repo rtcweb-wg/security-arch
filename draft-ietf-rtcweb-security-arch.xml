@@ -1748,7 +1748,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             audio (perhaps it is only expecting audio!)  potentially causing
             overload.  Muxing multiple media flows over a single transport makes
             it harder to individually suppress a single flow by denying ICE
-            keepalives; rtcpmux is not supported in WEbRTC. Either media-level
+            keepalives. Either media-level
             (RTCP) mechanisms must be used or the
             implementation must deny responses entirely, thus terminating the
             call.
