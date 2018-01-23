@@ -504,11 +504,8 @@
           and DTLS-SRTP <xref target="RFC5763"/> keying for SRTP
           <xref target="RFC3711"/> for the media channel and SCTP over DTLS
           <xref target="I-D.ietf-tsvwg-sctp-dtls-encaps"/> for data
-          channels. Specifically, Alice and Bob perform a DTLS handshake on
-          every channel which has been established by ICE. The total number of
-          channels depends on the amount of muxing; in the most likely case we
-          are using both RTP/RTCP mux and muxing multiple media streams on the
-          same channel, in which case there is only one DTLS handshake. Once the
+          channels. Specifically, Alice and Bob perform a DTLS handshake
+          which has been established by ICE.  Once the
           DTLS handshake has completed, the keys are exported <xref
           target="RFC5705"/> and used to key SRTP for the media channels.
         </t>
@@ -1751,7 +1748,8 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             audio (perhaps it is only expecting audio!)  potentially causing
             overload.  Muxing multiple media flows over a single transport makes
             it harder to individually suppress a single flow by denying ICE
-            keepalives. Either media-level (RTCP) mechanisms must be used or the
+            keepalives; rtcpmux is not supported in WEbRTC. Either media-level
+            (RTCP) mechanisms must be used or the
             implementation must deny responses entirely, thus terminating the
             call.
           </t>
