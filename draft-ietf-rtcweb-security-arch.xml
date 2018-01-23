@@ -925,7 +925,7 @@
               <list style="symbols">
                 <t>
                   The "security characteristics" MUST indicate the cryptographic
-                  algorithms in use (For example: "AES-CBC" or "Null Cipher".)
+                  algorithms in use (For example: "AES-CBC".)
                   However, if Null ciphers are used, that MUST be presented to
                   the user at the top-level UI.
                 </t>
