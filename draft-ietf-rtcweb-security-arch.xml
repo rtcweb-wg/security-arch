@@ -666,7 +666,7 @@
         <t>
           <list style="symbols">
             <t>
-              Browsers MUST not permit permanent screen or application sharing
+              Browsers MUST NOT permit permanent screen or application sharing
               permissions to be installed as a response to a JS request for
               permissions. Instead, they must require some other user action
               such as a permissions setting or an application install experience
@@ -681,7 +681,7 @@
             <t>
               The browser MUST indicate any windows which are currently being
               shared in some unambiguous way. Windows which are not visible MUST
-              not be shared even if the application is being shared.  If the
+              NOT be shared even if the application is being shared.  If the
               screen is being shared, then that MUST be indicated.
             </t>
           </list>
