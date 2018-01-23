@@ -1376,11 +1376,18 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               </t>
               <figure>
                 <artwork><![CDATA[
-  https://example.com/.well-known/idp-proxy/example
+  https://identity.example.com/.well-known/idp-proxy/example
   ]]></artwork>
               </figure>
               <t>
-                The IdP MAY redirect requests to this URL, but they MUST retain
+                The IdP MAY redirect requests to:
+               </t>
+               <figure>
+                <artwork><![CDATA[
+  https://example.com/.well-known/idp-proxy/example
+  ]]></artwork>
+               </figure>                 
+               <t>, but they MUST retain
                 the "https" scheme.  This changes the effective origin of the
                 IdP, but not the domain of the identities that the IdP is
                 permitted to assert and validate. I.e., the IdP is still
