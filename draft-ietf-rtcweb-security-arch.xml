@@ -1388,7 +1388,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
   ]]></artwork>
                </figure>                 
                <t>; or the IdP could redirect it to some totally unrelated URL, such
-                as https://trusted.net/not-well-known/idp; but they MUST retain
+                as https://otherdomain.example/not-well-known/idp; but they MUST retain
                 the "https" scheme.  This changes the effective origin of the
                 IdP, but not the domain of the identities that the IdP is
                 permitted to assert and validate. I.e., the IdP is still
