@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC7617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7617.xml">
 <!ENTITY RFC2818 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY RFC3261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml">
-<!ENTITY RFC3552 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3552.xml">
 <!ENTITY RFC3711 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3711.xml">
-<!ENTITY RFC3760 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3760.xml">
-<!ENTITY RFC4251 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4251.xml">
-<!ENTITY RFC4347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4347.xml">
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
 <!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
-<!ENTITY RFC8122 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8122.xml">
-<!ENTITY RFC7159 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml">
 <!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
 <!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
 <!ENTITY RFC5245 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5245.xml">
@@ -23,12 +16,15 @@
 <!ENTITY RFC5764 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5764.xml">
 <!ENTITY RFC5785 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5785.xml">
 <!ENTITY RFC5890 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5890.xml">
-<!ENTITY RFC6189 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6189.xml">
 <!ENTITY RFC6265 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6265.xml">
+<!ENTITY RFC6347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6347.xml"> 
 <!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
 <!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6455.xml">
 <!ENTITY RFC7022 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7022.xml">
+<!ENTITY RFC7617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7617.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
+<!ENTITY RFC8122 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8122.xml">
+<!ENTITY RFC8259 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml">
 <!ENTITY RFC8261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8261.xml">
 
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
@@ -500,7 +496,7 @@
         <t>
           Once the ICE checks have completed [more specifically, once some ICE
           checks have completed], Alice and Bob can set up a secure channel or
-          channels. This is performed via DTLS <xref target="RFC4347"/>
+          channels. This is performed via DTLS <xref target="RFC6347"/>
           and DTLS-SRTP <xref target="RFC5763"/> keying for SRTP
           <xref target="RFC3711"/> for the media channel and SCTP over DTLS
           <xref target="RFC8261"/> for data
@@ -821,7 +817,7 @@
       <section title="Communications Security" anchor="sec.proposal.comsec">
         <t>
           Implementations MUST implement SRTP <xref target="RFC3711"/>.
-          Implementations MUST implement DTLS <xref target="RFC4347"/> and
+          Implementations MUST implement DTLS <xref target="RFC6347"/> and
           DTLS-SRTP <xref target="RFC5763"/><xref target="RFC5764"/> for SRTP
           keying. Implementations MUST implement <xref
           target="RFC8261"/>.
@@ -1225,7 +1221,7 @@
             target="RFC8122"/>.
           </t>
           <t>
-            This object is encoded in a <xref target="RFC7159">JSON</xref>
+            This object is encoded in a <xref target="RFC8259">JSON</xref>
             string for passing to the IdP.
           </t>
           <t>
@@ -1311,7 +1307,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             </t>
 
             <t>
-              The identity assertion is a JSON <xref target="RFC7159"/> encoded
+              The identity assertion is a JSON <xref target="RFC8259"/> encoded
               dictionary that contains two values.  The <spanx
               style="verb">assertion</spanx> attribute contains an opaque string
               that is consumed by the IdP.  The <spanx style="verb">idp</spanx>
@@ -2057,11 +2053,8 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC2119;
       &RFC2818;
       &RFC3711;
-      &RFC4347;
       &RFC4566;
       &RFC4568;
-      &RFC8122;
-      &RFC7159;
       &RFC4648;
       &RFC5234;
       &RFC5245;
@@ -2070,9 +2063,12 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC5764;
       &RFC5785;
       &RFC5890;
+      &RFC6347;
       &RFC6454;
       &RFC7022;
       &RFC7675;
+      &RFC8122;
+      &RFC8259;
       &RFC8261;
 
       &I-D.ietf-rtcweb-security;
