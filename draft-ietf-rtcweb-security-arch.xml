@@ -33,6 +33,8 @@
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
 <!ENTITY I-D.ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-rtp-usage.xml">
+<!ENTITY I-D.ietf-mmusic-sdp-uks SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-mmusic-sdp-uks">
+
 ]>
 
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
@@ -1810,37 +1812,24 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               Fundamentally, the IdP proxy is just a piece of HTML and JS loaded
               by the browser, so nothing stops a Web attacker from creating
               their own IFRAME, loading the IdP proxy HTML/JS, and requesting a
-              signature. In order to prevent this attack, we require that all
-              signatures be tied to a specific origin ("rtcweb://...") which
-              cannot be produced by content JavaScript. Thus, while an attacker
-              can instantiate the IdP proxy, they cannot send messages from an
-              appropriate origin and so cannot create acceptable
-              assertions. I.e., the assertion request must have come from the
-              browser. This origin check is enforced on the relying party side,
-              not on the authenticating party side. The reason for this is to
-              take the burden of knowing which origins are valid off of the IdP,
-              thus making this mechanism extensible to other applications
-              besides WebRTC. The IdP simply needs to gather the origin
-              information (from the posted message) and attach it to the
-              assertion.
-            </t>
-            <t>
-              Note that although this origin check is enforced on the RP side
-              and not at the IdP, it is absolutely imperative that it be
-              done. The mechanisms in this document rely on the browser
-              enforcing access restrictions on the DTLS keys and assertion
-              requests which do not come with the right origin may be from
-              content JS rather than from browsers, and therefore those access
-              restrictions cannot be assumed.
+              signature over his own keys rather than those generated in
+              the browser. However, that proxy would be in the
+              attacker's origin, not the IdP's origin. Only the
+              browser itself can instantiate a context that (a) is in the IdP's origin and
+              (b) exposes the correct API surface. Thus, the IdP proxy on
+              the sender's side MUST ensure that it is running in the IdP's origin
+              prior to issuing assertions.
             </t>
             <t>
               Note that this check only asserts that the browser (or some other
               entity with access to the user's authentication data) attests to
               the request and hence to the fingerprint.  It does not demonstrate
               that the browser has access to the associated private
-              key. However, attaching one's identity to a key that the user does
-              not control does not appear to provide substantial leverage to an
-              attacker, so a proof of possession is omitted for simplicity.
+              key, and therefore an attacker can attach their own identity
+              to another party's keying material, thus making a call which
+              comes from Alice appear to come from the attacker.
+              See <xref target="I-D.ietf-mmusic-sdp-uks"/> for defenses against this
+              form of attack.
             </t>
           </section>
 
@@ -2106,6 +2095,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
 
       &I-D.ietf-rtcweb-security;
       &I-D.ietf-rtcweb-rtp-usage;
+      &I-D.ietf-mmusic-sdp-uks;
 
       <reference anchor="webcrypto">
         <front>
