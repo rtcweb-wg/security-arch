@@ -1792,7 +1792,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             will accept.
           </t>
 
-          
+
           <section title="PeerConnection Origin Check" anchor="sec.pc-origin">
             <t>
               Fundamentally, the IdP proxy is just a piece of HTML and JS loaded
@@ -1883,8 +1883,11 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                 which are confusable with other identities (see
                 <xref target="RFC6943"/> for more on this topic). This is
                 a problem with any identifier space of this type
-                (e.g., email addresses) and best practices for reducing
-                this risk are currently unclear.
+                (e.g., e-mail addresses).
+                Those minting identifers should avoid mixed scripts and similar
+                confusable characters. Those presenting these identifiers to a
+                user should consider highlighting cases of mixed script usage
+                (see <xref target="RFC5890"/>, section 4.4). Other best practices are still in development.
               </t>
             </section>
           </section>
