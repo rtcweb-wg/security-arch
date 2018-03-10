@@ -4,7 +4,7 @@
 <!ENTITY RFC2818 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY RFC3261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml">
 <!ENTITY RFC3711 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3711.xml">
-<!ENTITY RFC3711 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml">
+<!ENTITY RFC3986 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml">
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
 <!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
 <!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
@@ -161,7 +161,8 @@
         The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
         NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
         "MAY", and "OPTIONAL" in this document are to be interpreted as
-        described in BCP 14 [RFC2119] [RFC8174] when, and only when, they
+        described in BCP 14 <xref target="RFC2119"/>.
+        <xref target="RFC8174"/> when, and only when, they
         appear in all capitals, as shown here.
       </t>
     </section>
@@ -1332,8 +1333,8 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               <t>
                 <list style="hanging">
                   <t hangText="Authority:">
-                       The <xref target="RFC3986"> authority</xref> at which the 
-                       IdP's service is hosted.  Note that this may include a non-default 
+                       The <xref target="RFC3986"> authority</xref> at which the
+                       IdP's service is hosted.  Note that this may include a non-default
                        port or a userinfo component, but neither will be available
                        in a certificate verifying the site.
                   </t>
@@ -1357,10 +1358,10 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
                     target="RFC2818">HTTPS</xref>.
                   </t>
                   <t>
-                    The <xref target="RFC3986">authority</xref>.  As noted above, 
-                    the authority MAY contain a  non-default port number or 
-                    userinfo sub-component.  Both are removed when determining 
-                    if an asserted identity matches the name of the IdP.  
+                    The <xref target="RFC3986">authority</xref>.  As noted above,
+                    the authority MAY contain a  non-default port number or
+                    userinfo sub-component.  Both are removed when determining
+                    if an asserted identity matches the name of the IdP.
                   </t>
                   <t>
                     The path, starting with "/.well-known/idp-proxy/" and
@@ -2058,6 +2059,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC2119;
       &RFC2818;
       &RFC3711;
+      &RFC3986;
       &RFC4566;
       &RFC4568;
       &RFC4648;
