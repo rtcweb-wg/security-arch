@@ -20,6 +20,7 @@
 <!ENTITY RFC6347 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6347.xml">
 <!ENTITY RFC6454 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6454.xml">
 <!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6455.xml">
+<!ENTITY RFC6943 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6943.xml">
 <!ENTITY RFC7022 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7022.xml">
 <!ENTITY RFC7617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7617.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
@@ -1791,6 +1792,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             will accept.
           </t>
 
+          
           <section title="PeerConnection Origin Check" anchor="sec.pc-origin">
             <t>
               Fundamentally, the IdP proxy is just a piece of HTML and JS loaded
@@ -1873,6 +1875,18 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               user to instantly grasp that the call is being authenticated by
               Facebook, Google, etc.
             </t>
+
+            <section title="Confusable Characters">
+              <t>
+                Because a broad range of characters are permitted in identity
+                strings, it may be possible for attackers to craft identities
+                which are confusable with other identities (see
+                <xref target="RFC6943"/> for more on this topic). This is
+                a problem with any identifier space of this type
+                (e.g., email addresses) and best practices for reducing
+                this risk are currently unclear.
+              </t>
+            </section>
           </section>
 
           <section title="Web Security Feature Interactions">
@@ -2128,6 +2142,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
       &RFC5705;
       &RFC6455;
       &RFC6265;
+      &RFC6943;
       &I-D.ietf-rtcweb-jsep;
 
 
