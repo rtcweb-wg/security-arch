@@ -1319,6 +1319,14 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               attribute is a dictionary with one or two further values that
               identify the IdP, as described in <xref target="sec.idp-uri"/>.
             </t>
+
+            <t>
+              The semantics of multiple identity attributes are undefined.
+              Implementations SHOULD only include a single identity attribute in an
+              offer and relying parties MAY elect to ignore all but the first
+              identity attribute.
+            </t>
+
           </section>
         </section>
 
