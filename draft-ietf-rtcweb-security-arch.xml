@@ -503,7 +503,7 @@
           <xref target="RFC3711"/> for the media channel and SCTP over DTLS
           <xref target="RFC8261"/> for data
           channels. Specifically, Alice and Bob perform a DTLS handshake on
-          every channel which has been established by ICE. The total number of
+          every component which has been established by ICE. The total number of
           channels depends on the amount of muxing; in the most likely case we
           are using both RTP/RTCP mux and muxing multiple media streams on the
           same channel, in which case there is only one DTLS handshake. Once the
