@@ -1378,7 +1378,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               </t>
               <figure>
                 <artwork><![CDATA[
-  https://example.com/.well-known/idp-proxy/example
+  https://identity.example.com/.well-known/idp-proxy/example
   ]]></artwork>
               </figure>
               <t>
