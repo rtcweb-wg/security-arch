@@ -1959,6 +1959,31 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
     </section>
 
     <section title="Changes">
+      <section title="Changes since -11">
+        <t>
+          Update discussion of IdP security model
+        </t>
+        
+        <t>
+          Replace "domain name" with RFC 3986 Authority
+        </t>
+
+        <t>
+          Clean up discussion of how to generate IdP URI.
+        </t>
+
+        <t>
+          Remove obsolete text about null cipher suites.
+        </t>
+
+        <t>
+          Remove obsolete appendixes about older IdP systems
+        </t>
+
+        <t>
+          Require support for ECDSA, PFS, and AEAD
+        </t>
+      </section>
       <section title="Changes since -10">
         <t>
           Update cipher suite profiles.
