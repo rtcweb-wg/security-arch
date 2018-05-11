@@ -1199,7 +1199,7 @@
 
           <t>
             An identity assertion binds the user's identity (as asserted by the
-            IdP) to the SDP offer/exchange transaction and specifically to the
+            IdP) to the SDP offer/answer exchange and specifically to the
             media. In order to achieve this, the PeerConnection must provide the
             DTLS-SRTP fingerprint to be bound to the identity. This is provided
             as a JavaScript object (also known as a dictionary or hash) with a
@@ -1242,10 +1242,10 @@
           <section title="Carrying Identity Assertions">
             <t>
               Once an IdP has generated an assertion, it is attached to the SDP
-              message. This is done by adding a new identity attribute to the
-              SDP. The sole contents of this value are a <xref
-              target="RFC4648">base-64 encoded</xref> identity assertion.  For
-              example:
+              offer/answer message. This is done by adding a new identity
+              attribute to the SDP. The sole contents of this value are a
+              <xref target="RFC4648">base-64 encoded</xref> identity assertion.
+              For example:
             </t>
             <figure>
               <artwork><![CDATA[
