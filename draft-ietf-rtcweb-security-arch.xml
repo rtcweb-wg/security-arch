@@ -1243,10 +1243,9 @@
             <t>
               Once an IdP has generated an assertion, it is attached to the SDP
               offer/answer message. This is done by adding a new identity
-              attribute to the SDP; the offer includes the caller's assertion,
-              the answer includes the callee's assertino. The sole contents of
-              this value are a <xref target="RFC4648">base-64 encoded</xref>
-              identity assertion.  For example:
+              attribute to the SDP. The sole contents of this value are a
+              <xref target="RFC4648">base-64 encoded</xref> identity assertion.
+              For example:
             </t>
             <figure>
               <artwork><![CDATA[
