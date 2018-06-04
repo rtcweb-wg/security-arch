@@ -583,6 +583,11 @@
           location controlled by the attacker.  Implementations MUST either
           choose to terminate the call or display a warning at that point.
         </t>
+	<t>
+	  Also note that the security architecture depends on the keying material
+          not being available to move between origins.  But, it is assumed that
+          the identity assertion can be passed to anyone that the page cares to.
+	</t>
       </section>
 
       <section title="Device Permissions Model" anchor="sec.proposal.device.permissions">
