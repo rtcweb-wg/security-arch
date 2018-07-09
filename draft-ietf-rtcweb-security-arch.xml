@@ -945,6 +945,7 @@
           </list>
         </t>
       </section>
+    </section>
 
       <section title="Web-Based Peer Authentication" anchor="sec.generic.idp">
         <t>
@@ -1630,7 +1631,6 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               </section>
 
             </section>
-          </section>
 
       <section title="Security Considerations" anchor="sec.sec-cons">
         <t>
@@ -1963,7 +1963,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
         <t>
           Update discussion of IdP security model
         </t>
-        
+
         <t>
           Replace "domain name" with RFC 3986 Authority
         </t>
