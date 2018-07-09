@@ -1277,7 +1277,8 @@ a=sendrecv
               used to offer alternative certificates for a peer.  The <spanx
               style="verb">a=identity</spanx> attribute MUST include all
               fingerprint values that are included in <spanx
-              style="verb">a=fingerprint</spanx> lines.
+              style="verb">a=fingerprint</spanx> lines of the session
+              description.
             </t>
             <t>
               The RP browser MUST verify that the in-use certificate for a DTLS
@@ -1963,7 +1964,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
         <t>
           Update discussion of IdP security model
         </t>
-        
+
         <t>
           Replace "domain name" with RFC 3986 Authority
         </t>
