@@ -1288,9 +1288,9 @@ a=sendrecv
 
           <section title="a=identity Attribute" anchor="sec.a-identity">
             <t>
-              The identity attribute is session level only.  It contains an
-              identity assertion, encoded as a <xref target="RFC4648">base-64
-              string</xref>.
+              The identity attribute is a session-level attribute only.  It
+              contains an identity assertion, encoded as a <xref
+              target="RFC4648">base-64 string</xref>.
             </t>
             <figure>
               <preamble>
@@ -1963,7 +1963,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
         <t>
           Update discussion of IdP security model
         </t>
-        
+
         <t>
           Replace "domain name" with RFC 3986 Authority
         </t>
