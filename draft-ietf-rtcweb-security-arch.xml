@@ -1321,6 +1321,12 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
               attribute is a dictionary with one or two further values that
               identify the IdP, as described in <xref target="sec.idp-uri"/>.
             </t>
+            <t>
+              An identity assertion as defined in this document relies on the
+              value of <spanx style="verb">a=fingerprint</spanx> attributes, but
+              this does not preclude the definition of alternative means of
+              binding an assertion to the identity of a peer.
+            </t>
 
             <t>
               The semantics of multiple identity attributes are undefined.
