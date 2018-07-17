@@ -1303,14 +1303,13 @@ a=sendrecv
               </preamble>
               <artwork type="inline"><![CDATA[
 identity-attribute  = "identity:" identity-assertion
-                      [ SP identity-extension
-                        *(";" [ SP ] identity-extension) ]
+                        *(SP identity-extension)
 identity-assertion  = base64
 base64              = 1*(ALPHA / DIGIT / "+" / "/" / "=" )
 identity-extension  = extension-att-name [ "=" extension-att-value ]
 extension-att-name  = token
-extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
-                      ; byte-string from [RFC4566] omitting ";"
+extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-1f / %x21-ff)
+                      ; byte-string from [RFC4566] omitting SP
 ]]></artwork>
             </figure>
             <t>
