@@ -1277,7 +1277,8 @@ a=sendrecv
               used to offer alternative certificates for a peer.  The <spanx
               style="verb">a=identity</spanx> attribute MUST include all
               fingerprint values that are included in <spanx
-              style="verb">a=fingerprint</spanx> lines.
+              style="verb">a=fingerprint</spanx> lines of the session
+              description.
             </t>
             <t>
               The RP browser MUST verify that the in-use certificate for a DTLS
