@@ -97,7 +97,7 @@
         with standardizing protocols for real-time communications between Web
         browsers. The major use cases for WebRTC technology are real-time audio
         and/or video calls, Web conferencing, and direct data transfer. Unlike
-        most conventional real-time systems, (e.g., SIP-based<xref
+        most conventional real-time systems, (e.g., SIP-based <xref
         target="RFC3261"></xref> soft phones) WebRTC communications are directly
         controlled by some Web server, via a JavaScript (JS) API as shown in
         <xref target="fig.simple"/>.
@@ -164,7 +164,7 @@
         The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
         NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
         "MAY", and "OPTIONAL" in this document are to be interpreted as
-        described in BCP 14 <xref target="RFC2119"/>.
+        described in BCP 14 <xref target="RFC2119"/>
         <xref target="RFC8174"/> when, and only when, they
         appear in all capitals, as shown here.
       </t>
@@ -174,7 +174,7 @@
       <t>
         The basic assumption of this architecture is that network resources
         exist in a hierarchy of trust, rooted in the browser, which serves as
-        the user's TRUSTED COMPUTING BASE (TCB). Any security property which the
+        the user's Trusted Computing Base (TCB). Any security property which the
         user wishes to have enforced must be ultimately guaranteed by the
         browser (or transitively by some property the browser
         verifies). Conversely, if the browser is compromised, then no security
@@ -187,7 +187,9 @@
         Optimally, we would not rely on trust in any entities other than the
         browser. However, this is unfortunately not possible if we wish to have
         a functional system.  Other network elements fall into two categories:
-        those which can be authenticated by the browser and thus can be granted permissions to access sensitive resources, and those which cannot be authenticated and thus are untrusted.
+        those which can be authenticated by the browser and thus can be granted
+        permissions to access sensitive resources, and those which cannot be
+        authenticated and thus are untrusted.
       </t>
 
       <section title="Authenticated Entities" anchor="sec.proposal.authenticated">
@@ -273,7 +275,7 @@
         This separation of identity provision and signaling isn't particularly
         important in "closed world" cases where Alice and Bob are users on the
         same social network and have identities based on that domain (<xref
-        target="fig.proposal.idp"/>) However, there are important settings where
+        target="fig.proposal.idp"/>). However, there are important settings where
         that is not the case, such as federation (calls from one domain to
         another; <xref target="fig.proposal-federated.idp"/>) and calling on
         untrusted sites, such as where two users who have a relationship via a
@@ -428,7 +430,7 @@
         <t>
           This message is sent to the signaling server, e.g., by XMLHttpRequest
           <xref target="XmlHttpRequest"/> or by WebSockets <xref
-          target="RFC6455"/>.  preferably over TLS <xref target="RFC5246"/>.
+          target="RFC6455"/>, preferably over TLS <xref target="RFC5246"/>.
           The signaling server processes the message from Alice's browser,
           determines that this is a call to Bob and sends a signaling message to
           Bob's browser (again, the format is currently undefined).  The JS on
@@ -471,7 +473,7 @@
           Of course, the call works perfectly well if either Alice or Bob
           doesn't have a relationship with an IdP; they just get a lower level
           of assurance. I.e., they simply have whatever information their
-          calling site claims about the caller/calllee's identity.  Moreover,
+          calling site claims about the caller/callee's identity.  Moreover,
           Alice might wish to make an anonymous call through an anonymous
           calling site, in which case she would of course just not provide any
           identity assertion and the calling site would mask her identity from
@@ -847,8 +849,8 @@
           SRTP_AES128_CM_HMAC_SHA1_80 MUST be supported for
           SRTP. Implementations SHOULD implement DTLS 1.2 with the
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite.  Implementations
-          MUST favor cipher suites which support PFS over non-PFS cipher suites
-          and SHOULD favor AEAD over non-AEAD cipher suites.
+          MUST favor cipher suites which support (Perfect Forward Secrecy) PFS
+          over non-PFS cipher suites and SHOULD favor AEAD over non-AEAD cipher suites.
         </t>
 
         <t>
@@ -938,7 +940,7 @@
                 <t>
                   The "security characteristics" MUST include some mechanism to
                   allow an out-of-band verification of the peer, such as a
-                  certificate fingerprint or an SAS.
+                  certificate fingerprint or a Short Authentication String (SAS).
                 </t>
               </list>
             </t>
@@ -1053,7 +1055,7 @@
                 is correctly verifying AP identities, and there can potentially
                 be multiple IdPs attesting to the same section of the identity
                 space. Probably the best-known example of a third-party identity
-                provider is SSL certificates, where there are a large number of
+                provider is SSL/TLS certificates, where there are a large number of
                 CAs all of whom can attest to any domain name.
               </t>
             </list>
@@ -1242,10 +1244,10 @@
           <section title="Carrying Identity Assertions">
             <t>
               Once an IdP has generated an assertion, it is attached to the SDP
-              offer/answer message. This is done by adding a new identity
-              attribute to the SDP. The sole contents of this value are a
-              <xref target="RFC4648">base-64 encoded</xref> identity assertion.
-              For example:
+              offer/answer message. This is done by adding a new identity attribute to the
+              SDP. The sole contents of this value are a <xref
+              target="RFC4648">Base64-encoded</xref> identity assertion.  For
+              example:
             </t>
             <figure>
               <artwork><![CDATA[
@@ -1291,7 +1293,7 @@ a=sendrecv
             <t>
               The identity attribute is a session-level attribute only.  It
               contains an identity assertion, encoded as a <xref
-              target="RFC4648">base-64 string</xref>.
+              target="RFC4648">Base-64 string</xref>.
             </t>
             <figure>
               <preamble>
@@ -1509,7 +1511,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
 
               <t>
                 For use in signaling, the assertion is serialized into JSON,
-                <xref target="RFC4648">base64-encoded</xref>, and used as the
+                <xref target="RFC4648">Base64-encoded</xref>, and used as the
                 value of the <spanx style="verb">a=identity</spanx> attribute.
               </t>
             </section>
@@ -1685,11 +1687,11 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
             to compute digital signatures, then it would be possible for content
             JS to get an identity assertion for a browser's generated key and
             then use that assertion plus a signature by the key to authenticate
-            a call protected under an ephemeral DH key controlled by the content
+            a call protected under an ephemeral Diffie-Hellman (DH) key controlled by the content
             JS, thus violating the security guarantees otherwise provided by the
             IdP mechanism. Note that it is not sufficient merely to deny the
             content JS direct access to the keys, as some have suggested doing
-            with the WebCrypto API.  <xref target="webcrypto"/>.  The JS must
+            with the WebCrypto API <xref target="webcrypto"/>.  The JS must
             also not be allowed to perform operations that would be valid for a
             DTLS endpoint. By far the safest approach is simply to deny the
             ability to perform any operations that depend on secret information
@@ -1967,6 +1969,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
     </section>
 
     <section title="Changes">
+      <t> [RFC Editor: Please remove this section prior to publication.]</t>
       <section title="Changes since -11">
         <t>
           Update discussion of IdP security model
