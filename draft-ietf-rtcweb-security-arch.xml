@@ -556,6 +556,163 @@
       </section>
     </section>
 
+    <section title="SDP Identity Attribute" anchor="sec.sdp-id-attr">
+      <t>
+	    The SDP 'identity' attribute is a session-level attribute that is used
+	    by an endpoint to convey its identity assertion to its peer. The identity
+        assertion value is encoded as a <xref target="RFC4648">Base-64 string</xref>
+      </t>
+      <t>
+	    The procedures in this section are based on the assumption that the identity assertion 
+        of an endpoint is bound to the fingerprints of the endpoint. This does not preclude the 
+        definition of alternative means of binding an assertion to the identity, but such means are 
+        outside the scope of this specification.
+      </t>
+      <t>
+	    The semantics of multiple 'identity' attributes within an offer or answer are undefined.
+	    Implementations SHOULD only include a single identity attribute in an
+	    offer or answer and relying parties MAY elect to ignore all but the first
+	    identity attribute. However, a single identity attribute can convey multiple 
+	    identity assertions.
+      </t>
+      <figure>
+      <artwork type="inline"><![CDATA[
+
+Name: identity
+
+Value: identity-assertion
+
+Usage Level: session
+
+Charset Dependent: no
+
+Default Value: N/A
+
+Syntax:
+
+  identity-assertion        = identity-assertion-value 
+                              *(SP identity-extension)
+  identity-assertion-value  = base64
+  base64                    = 1*(ALPHA / DIGIT / "+" / "/" / "=" )
+  identity-extension        = extension-name [ "=" extension-value ]
+  extension-name            = token
+  extension-value           = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
+                              ; byte-string from [RFC4566] omitting ";"
+
+  <ALPHA and DIGIT defined in [RFC4566]>
+
+ Example:
+
+  a=identity:\
+    eyJpZHAiOnsiZG9tYWluIjoiZXhhbXBsZS5vcmciLCJwcm90b2NvbCI6ImJvZ3Vz\
+    In0sImFzc2VydGlvbiI6IntcImlkZW50aXR5XCI6XCJib2JAZXhhbXBsZS5vcmdc\
+    IixcImNvbnRlbnRzXCI6XCJhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3l6XCIsXCJz\
+    aWduYXR1cmVcIjpcIjAxMDIwMzA0MDUwNlwifSJ9
+      ]]></artwork>
+       </figure>
+       <t>
+         This specification does not define any extensions for the attribute
+       </t>
+       <t>
+         The identity-assertion value is a JSON <xref target="RFC8259"/> encoded string. The JSON object 
+         contains two keys: "assertion" and "idp". The "assertion" key value contains 
+         an opaque string that is consumed by the IdP. The "idp" key value contains a
+         dictionary with one or two further values that identify the IdP. See
+         <xref target="sec.request-assert"/> for more details.
+       </t>
+       <section title="Offer/Answer Considerations" anchor="sec.sdp-id-attr-oa">
+         <t>
+		   This section defines the SDP Offer/Answer <xref target="RFC6454"/> considerations for the SDP
+		   'identity' attribute.
+	     </t>
+	     <section title="Adding Identity Assertion to Session Description" anchor="sec.sdp-id-attr-oa-add">
+	       <t>
+             This section defines the procedures when an endpoint adds an identity assertion to
+             a session description within a session. This might take place when a session is initiated,
+             or later during the session.
+	       </t>
+           <section title="Offer Procedures" anchor="sec.sdp-id-attr-oa-add-off">
+             <t>
+               When an offerer sends an offer, in order to provide its identity assertion to the peer, it MUST include an 
+               'identity' attribute in the offer. In addition, it MUST include SDP 'fingerprint' attributes
+               for each fingerprint that have been used to assert the identity.
+             </t>
+             <t>
+               When the offerer receives an answer that contains an 'identity' attribute, the offerer can use
+               the attribute information to contact the IdP, and verify the identity of, the peer. If the offerer does not
+               accept the attribute (or the attribute value), or if the identity verification fails, it MUST 
+               take proper actions to reject the answer.
+             </t>
+           </section>
+           <section title="Answerer Procedures" anchor="sec.sdp-id-attr-oa-add-ans">
+             <t>
+               When an answerer receives in offer that contains an 'identity' attribute, the answerer can use the
+               the attribute information to contact the IdP, and verify the identity of, the peer. If the answerer 
+               does not accept the attribute value, or if the identity verification fails, it MUST reject the offer.
+             </t>
+             <t>
+               When an answerer sends an answer, in order to provide its identity assertion to the peer, it MUST include an 
+               'identity' attribute in the answer. In addition, it MUST include 'fingerprint' attributes
+               for each fingerprint that have been used to assert the identity.
+             </t>
+             <t>
+               The answerer can include an 'identity' attribute in the answer independently of whether the 
+               corresponding offer contained an identity attribute or not.
+             </t>
+            </section>
+          </section>
+	      <section title="Modifying Identity Assertion within Session Description" anchor="sec.sdp-id-attr-oa-mod">
+	        <t>
+              When an endpoint has included its identity assertion in a previous offer or answer, and when the endpoint later in session
+              sends an offer or answer, the endpoint can either keep the identity assertion value unchanged, modify the value
+              or revoke the identity assertion. This section describes the procedures for that.
+            </t>
+            <t>
+              NOTE: Specific usages might restrict the modification and/or revoking of the identity assertion within a session.
+	        </t>
+            <section title="Offer Procedures" anchor="sec.sdp-id-attr-oa-mod-off">
+              <t>
+                When the offerer sends an offer, if the offerer wants to maintain the identity assertion value it previously provided (in an offer
+                or answer) as part of a successful offer/answer transaction within the session, it MUST include an identity attribute with the previously provided 
+                attribute value in the offer.
+              </t>
+              <t>
+                If the offerer wants to revoke its identity assertion from the session, it MUST NOT include an identity attribute in the offer.
+              </t>
+              <t>
+                If the offerer wants to modify its identity assertion within the session, it MUST include an
+                'identity' attribute value with the new identity assertion in the offer. In addition, it MUST include 'fingerprint' attributes
+                for each fingerprint that have been used to assert the identity.
+              </t>
+              <t>
+                When the offerer receives an answer that contains an 'identity' attribute, the offerer can use
+                the attribute information to contact the IdP, and verify the identity of, the peer. If the offerer does not
+                accept the attribute value, or if the identity verification fails, it MUST take proper actions to reject the answer. 
+                If the answer does not contain an 'identity' attribute, the offer MUST assume that the identity of the peer can no longer 
+                be verified.
+              </t>
+            </section>
+            <section title="Answerer Procedures" anchor="sec.sdp-id-attr-oa-mod-ans">
+              <t>
+                When an answerer receives an offer that contains an 'identity' attribute, the answerer can use the
+                the attribute information to contact the IdP, and verify the identity of, the peer. If the answerer 
+                does not accept the attribute value, or if the identity verification fails, it MUST reject the offer. 
+                If the offer does not contain an identity attribute, the answerer MUST assume that the identity of the peer 
+                can no longer be verified.
+              </t>
+              <t>
+                If the answerer wants to revoke its identity assertion from the session, it MUST NOT include an identity attribute in the answer.
+              </t>
+              <t>
+                If the answerer wants to modify its identity assertion within the session, it MUST include an
+                'identity' attribute value with the new identity assertion in the answer. In addition, it MUST include 'fingerprint' attributes
+                for each fingerprint that have been used to assert the identity.
+              </t>
+            </section>
+          </section>
+        </section>
+    </section>
+    
     <section title="Detailed Technical Description" anchor="sec.proposal.detailed">
 
       <section title="Origin and Web Security Issues" anchor="sec.proposal.origin">
@@ -1294,56 +1451,6 @@ a=sendrecv
               when verifying an assertion.
             </t>
           </section>
-
-          <section title="a=identity Attribute" anchor="sec.a-identity">
-            <t>
-              The identity attribute is a session-level attribute only.  It
-              contains an identity assertion, encoded as a <xref
-              target="RFC4648">Base-64 string</xref>.
-            </t>
-            <figure>
-              <preamble>
-                The syntax of this SDP attribute is defined using <xref
-                target="RFC5234">Augmented BNF</xref>:
-              </preamble>
-              <artwork type="inline"><![CDATA[
-identity-attribute  = "identity:" identity-assertion
-                        *(SP identity-extension)
-identity-assertion  = base64
-base64              = 1*(ALPHA / DIGIT / "+" / "/" / "=" )
-identity-extension  = extension-att-name [ "=" extension-att-value ]
-extension-att-name  = token
-extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-1f / %x21-ff)
-                      ; byte-string from [RFC4566] omitting SP
-]]></artwork>
-            </figure>
-            <t>
-              No extensions are defined for this attribute.
-            </t>
-
-            <t>
-              The identity assertion is a JSON <xref target="RFC8259"/> encoded
-              dictionary that contains two values.  The <spanx
-              style="verb">assertion</spanx> attribute contains an opaque string
-              that is consumed by the IdP.  The <spanx style="verb">idp</spanx>
-              attribute is a dictionary with one or two further values that
-              identify the IdP, as described in <xref target="sec.idp-uri"/>.
-            </t>
-            <t>
-              An identity assertion as defined in this document relies on the
-              value of <spanx style="verb">a=fingerprint</spanx> attributes, but
-              this does not preclude the definition of alternative means of
-              binding an assertion to the identity of a peer.
-            </t>
-
-            <t>
-              The semantics of multiple identity attributes are undefined.
-              Implementations SHOULD only include a single identity attribute in an
-              offer and relying parties MAY elect to ignore all but the first
-              identity attribute.
-            </t>
-
-          </section>
         </section>
 
             <section title="Determining the IdP URI" anchor="sec.idp-uri">
@@ -1956,7 +2063,7 @@ extension-att-value = 1*(%x01-09 / %x0b-0c / %x0e-1f / %x21-ff)
             <t hangText="Purpose:">This attribute carries an identity assertion,
             binding an identity to the transport-level security session.</t>
             <t hangText="Appropriate Values:">See <xref
-            target="sec.a-identity"/> of RFCXXXX [[Editor Note: This
+            target="sec.sdp-id-attr"/> of RFCXXXX [[Editor Note: This
             document.]]</t>
             <t hangText="Mux Category:">NORMAL.</t>
           </list>
