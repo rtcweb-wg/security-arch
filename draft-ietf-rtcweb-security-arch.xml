@@ -560,7 +560,7 @@
       <t>
 	    The SDP 'identity' attribute is a session-level attribute that is used
 	    by an endpoint to convey its identity assertion to its peer. The identity
-        assertion value is encoded as a <xref target="RFC4648">Base-64 string</xref>
+        assertion value is encoded as Base-64, as described in Section 4 of <xref target="RFC4648"/>.
       </t>
       <t>
 	    The procedures in this section are based on the assumption that the identity assertion 
@@ -572,35 +572,42 @@
 	    The semantics of multiple 'identity' attributes within an offer or answer are undefined.
 	    Implementations SHOULD only include a single identity attribute in an
 	    offer or answer and relying parties MAY elect to ignore all but the first
-	    identity attribute. However, a single identity attribute can convey multiple 
-	    identity assertions.
+	    identity attribute.
+      </t>
+      <t>
+        <list style="hanging">
+        <t>
+          Name: identity
+        </t>
+        <t>
+          Value: identity-assertion
+        </t>
+        <t>
+          Usage Level: session
+        </t>
+        <t>
+          Charset Dependent: no
+        </t>
+        <t>
+          Default Value: N/A
+        </t>
+        </list>
       </t>
       <figure>
       <artwork type="inline"><![CDATA[
-
-Name: identity
-
-Value: identity-assertion
-
-Usage Level: session
-
-Charset Dependent: no
-
-Default Value: N/A
-
 Syntax:
 
   identity-assertion        = identity-assertion-value 
                               *(SP identity-extension)
   identity-assertion-value  = base64
-  base64                    = 1*(ALPHA / DIGIT / "+" / "/" / "=" )
   identity-extension        = extension-name [ "=" extension-value ]
   extension-name            = token
   extension-value           = 1*(%x01-09 / %x0b-0c / %x0e-3a / %x3c-ff)
-                              ; byte-string from [RFC4566] omitting ";"
+                              ; byte-string from [RFC4566]
 
-  <ALPHA and DIGIT defined in [RFC4566]>
-
+  <ALPHA and DIGIT as defined in [RFC4566]>
+  <base64 as defined in [RFC4566]>
+  
  Example:
 
   a=identity:\
@@ -608,6 +615,11 @@ Syntax:
     In0sImFzc2VydGlvbiI6IntcImlkZW50aXR5XCI6XCJib2JAZXhhbXBsZS5vcmdc\
     IixcImNvbnRlbnRzXCI6XCJhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3l6XCIsXCJz\
     aWduYXR1cmVcIjpcIjAxMDIwMzA0MDUwNlwifSJ9
+    
+  Note that long lines in the example are folded to meet the column
+  width constraints of this document; the backslash ("\") at the end of
+  a line and the carriage return that follows shall be ignored.
+  
       ]]></artwork>
        </figure>
        <t>
@@ -615,8 +627,8 @@ Syntax:
        </t>
        <t>
          The identity-assertion value is a JSON <xref target="RFC8259"/> encoded string. The JSON object 
-         contains two keys: "assertion" and "idp". The "assertion" key value contains 
-         an opaque string that is consumed by the IdP. The "idp" key value contains a
+         contains two keys: "assertion" and "idp". The <spanx style="verb">"assertion"</spanx> key value contains 
+         an opaque string that is consumed by the IdP. The <spanx style="verb">"idp"</spanx> key value contains a
          dictionary with one or two further values that identify the IdP. See
          <xref target="sec.request-assert"/> for more details.
        </t>
@@ -633,13 +645,13 @@ Syntax:
 	       </t>
            <section title="Offer Procedures" anchor="sec.sdp-id-attr-oa-add-off">
              <t>
-               When an offerer sends an offer, in order to provide its identity assertion to the peer, it MUST include an 
+               When an offerer sends an offer, in order to provide its identity assertion to the peer, it includes an 
                'identity' attribute in the offer. In addition, it MUST include SDP 'fingerprint' attributes
-               for each fingerprint that have been used to assert the identity.
+               for each fingerprint that has been used to assert the identity.
              </t>
              <t>
                When the offerer receives an answer that contains an 'identity' attribute, the offerer can use
-               the attribute information to contact the IdP, and verify the identity of, the peer. If the offerer does not
+               the attribute information to contact the IdP, and verify the identity of the peer. If the offerer does not
                accept the attribute (or the attribute value), or if the identity verification fails, it MUST 
                take proper actions to reject the answer.
              </t>
@@ -647,11 +659,11 @@ Syntax:
            <section title="Answerer Procedures" anchor="sec.sdp-id-attr-oa-add-ans">
              <t>
                When an answerer receives in offer that contains an 'identity' attribute, the answerer can use the
-               the attribute information to contact the IdP, and verify the identity of, the peer. If the answerer 
+               the attribute information to contact the IdP, and verify the identity of the peer. If the answerer 
                does not accept the attribute value, or if the identity verification fails, it MUST reject the offer.
              </t>
              <t>
-               When an answerer sends an answer, in order to provide its identity assertion to the peer, it MUST include an 
+               When an answerer sends an answer, in order to provide its identity assertion to the peer, it includes an 
                'identity' attribute in the answer. In addition, it MUST include 'fingerprint' attributes
                for each fingerprint that have been used to assert the identity.
              </t>
@@ -663,9 +675,9 @@ Syntax:
           </section>
 	      <section title="Modifying Identity Assertion within Session Description" anchor="sec.sdp-id-attr-oa-mod">
 	        <t>
-              When an endpoint has included its identity assertion in a previous offer or answer, and when the endpoint later in session
-              sends an offer or answer, the endpoint can either keep the identity assertion value unchanged, modify the value
-              or revoke the identity assertion. This section describes the procedures for that.
+              When an endpoint has included its identity assertion in a previous offer or answer, and when the endpoint later in the session
+              sends an offer or answer, the endpoint can either keep the identity assertion value unchanged, modify the value,
+              or revoke the identity assertion. This section describes the procedures for doing so.
             </t>
             <t>
               NOTE: Specific usages might restrict the modification and/or revoking of the identity assertion within a session.
@@ -686,7 +698,7 @@ Syntax:
               </t>
               <t>
                 When the offerer receives an answer that contains an 'identity' attribute, the offerer can use
-                the attribute information to contact the IdP, and verify the identity of, the peer. If the offerer does not
+                the attribute information to contact the IdP, and verify the identity of the peer. If the offerer does not
                 accept the attribute value, or if the identity verification fails, it MUST take proper actions to reject the answer. 
                 If the answer does not contain an 'identity' attribute, the offer MUST assume that the identity of the peer can no longer 
                 be verified.
@@ -695,7 +707,7 @@ Syntax:
             <section title="Answerer Procedures" anchor="sec.sdp-id-attr-oa-mod-ans">
               <t>
                 When an answerer receives an offer that contains an 'identity' attribute, the answerer can use the
-                the attribute information to contact the IdP, and verify the identity of, the peer. If the answerer 
+                the attribute information to contact the IdP, and verify the identity of the peer. If the answerer 
                 does not accept the attribute value, or if the identity verification fails, it MUST reject the offer. 
                 If the offer does not contain an identity attribute, the answerer MUST assume that the identity of the peer 
                 can no longer be verified.
