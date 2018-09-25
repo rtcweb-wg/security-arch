@@ -638,7 +638,7 @@ Syntax:
 		   'identity' attribute.
 	     </t>
          <t>
-           Within the section, 'initial offer' refers to the first offer, within an
+           Within this section, 'initial offer' refers to the first offer, within an
            SDP session, in which the offerer includes an SDP 'identity attribute'.
          </t>
          <section title="Generating the Initial SDP Offer" anchor="sec.sdp-id-attr-oa-inio">
@@ -691,11 +691,8 @@ Syntax:
          <t>
            If the endpoint wants to maintain the previously provided identity assertion, 
            it MUST include an identity attribute with the previously provided attribute value
-           in the offer or answer.
-         </t>
-         <t>
-           If the endpoint wants to revoke its identity assertion from the
-           session, it MUST NOT include an identity attribute in the offer or answer.
+           in the offer or answer. In addition, it MUST include 'fingerprint' attributes for
+           each fingerprint that have been used to assert the identity.
          </t>
          <t>     
            If the endpoint wants to modify its identity assertion within the
@@ -703,6 +700,10 @@ Syntax:
            identity assertion in the offer or answer. In addition, it MUST include
            'fingerprint' attributes for each fingerprint that have been used to
            assert the identity.
+         </t>
+         <t>
+           If the endpoint wants to revoke its identity assertion from the
+           session, it MUST NOT include an identity attribute in the offer or answer.
          </t>
          <t>
            NOTE: Specific usages might restrict the modification and/or revoking
