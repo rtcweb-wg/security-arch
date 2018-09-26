@@ -570,27 +570,18 @@
       </t>
       <t>
 	    The semantics of multiple 'identity' attributes within an offer or answer are undefined.
-	    Implementations SHOULD only include a single identity attribute in an
+	    Implementations SHOULD only include a single 'identity' attribute in an
 	    offer or answer and relying parties MAY elect to ignore all but the first
-	    identity attribute.
+	    'identity' attribute.
       </t>
       <t>
         <list style="hanging">
-        <t>
-          Name: identity
-        </t>
-        <t>
-          Value: identity-assertion
-        </t>
-        <t>
-          Usage Level: session
-        </t>
-        <t>
-          Charset Dependent: no
-        </t>
-        <t>
-          Default Value: N/A
-        </t>
+        <t hangText="Name:">identity</t>
+        <t hangText="Value:">identity-assertion</t>
+        <t hangText="Usage Level:">session</t>
+        <t hangText="Charset Dependent:">no</t>
+        <t hangText="Default Value:">N/A</t>
+        <t hangText="Name:">identity</t>
         </list>
       </t>
       <figure>
@@ -623,12 +614,12 @@ Syntax:
       ]]></artwork>
        </figure>
        <t>
-         This specification does not define any extensions for the attribute
+         This specification does not define any extensions for the attribute.
        </t>
        <t>
          The identity-assertion value is a JSON <xref target="RFC8259"/> encoded string. The JSON object 
-         contains two keys: "assertion" and "idp". The <spanx style="verb">"assertion"</spanx> key value contains 
-         an opaque string that is consumed by the IdP. The <spanx style="verb">"idp"</spanx> key value contains a
+         contains two keys: "assertion" and "idp". The <spanx style="verb">assertion</spanx> key value contains 
+         an opaque string that is consumed by the IdP. The <spanx style="verb">idp</spanx> key value contains a
          dictionary with one or two further values that identify the IdP. See
          <xref target="sec.request-assert"/> for more details.
        </t>
@@ -638,8 +629,8 @@ Syntax:
 		   'identity' attribute.
 	     </t>
          <t>
-           Within this section, 'initial offer' refers to the first offer, within an
-           SDP session, in which the offerer includes an SDP 'identity attribute'.
+           Within this section, 'initial offer' refers to the first offer in the
+           SDP session that contains an SDP <spanx style="verb">identity</spanx> attribute.
          </t>
          <section title="Generating the Initial SDP Offer" anchor="sec.sdp-id-attr-oa-inio">
          <t>
@@ -668,7 +659,7 @@ Syntax:
          <t>
            NOTE: The answerer can include an 'identity' attribute in the answer
            independently of whether the corresponding offer contained an
-           identity attribute or not.
+           'identity' attribute or not.
          </t>
          </section>
          <section title="Offerer Processing of SDP Answer" anchor="sec.sdp-id-attr-oa-offa">
@@ -680,7 +671,7 @@ Syntax:
            verification fails, it MUST take proper actions to reject the answer.
          </t>
          </section>
-         <section title="Modifying Session" anchor="sec.sdp-id-attr-oa-modi">
+         <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
          <t>
            When an endpoint has provided its identity assertion in a previous
            successful offer/answer exchange, and when the endpoint later in the 
@@ -690,7 +681,7 @@ Syntax:
          </t>
          <t>
            If the endpoint wants to maintain the previously provided identity assertion, 
-           it MUST include an identity attribute with the previously provided attribute value
+           it MUST include an 'identity' attribute with the previously provided attribute value
            in the offer or answer. In addition, it MUST include 'fingerprint' attributes for
            each fingerprint that have been used to assert the identity.
          </t>
@@ -703,11 +694,15 @@ Syntax:
          </t>
          <t>
            If the endpoint wants to revoke its identity assertion from the
-           session, it MUST NOT include an identity attribute in the offer or answer.
+           session, it MUST NOT include an 'identity' attribute in the offer or answer.
          </t>
          <t>
-           NOTE: Specific usages might restrict the modification and/or revoking
-           of the identity assertion within a session.
+           Specific usages might restrict the modification and/or revoking
+           of the identity assertion within a session. Endpoints can add, modify, or 
+           remove 'fingerprint' attributes when modifying a session. If a modified session 
+           retains the 'identity' attribute, there MUST be at least one 'fingerprint' attribute 
+           that applies to each media section and any 'fingerprint' attributes that are included 
+           MUST be covered by the 'identity' attribute.
          </t>
          </section>         
         </section>
@@ -1389,7 +1384,7 @@ Syntax:
             style="verb">algorithm</spanx> and <spanx
             style="verb">digest</spanx> values, which correspond directly to
             the algorithm and digest values in the <spanx
-            style="verb">a=fingerprint</spanx> line of the SDP <xref
+            style="verb">fingerprint</spanx> attribute of the SDP <xref
             target="RFC8122"/>.
           </t>
           <t>
@@ -1407,7 +1402,7 @@ Syntax:
           <section title="Carrying Identity Assertions">
             <t>
               Once an IdP has generated an assertion, it is attached to the SDP
-              offer/answer message. This is done by adding a new identity attribute to the
+              offer/answer message. This is done by adding a new 'identity' attribute to the
               SDP. The sole contents of this value are a <xref
               target="RFC4648">Base64-encoded</xref> identity assertion.  For
               example:
@@ -1433,16 +1428,16 @@ a=sendrecv
 ]]></artwork>
             </figure>
             <t>
-              The identity attribute attests to all <spanx
-              style="verb">a=fingerprint</spanx> attributes in the session
+              The 'identity' attribute attests to all <spanx
+              style="verb">fingerprint</spanx> attributes in the session
               description. It is therefore a session-level attribute.
             </t>
             <t>
-              Multiple <spanx style="verb">a=fingerprint</spanx> values can be
+              Multiple <spanx style="verb">fingerprint</spanx> values can be
               used to offer alternative certificates for a peer.  The <spanx
-              style="verb">a=identity</spanx> attribute MUST include all
+              style="verb">identity</spanx> attribute MUST include all
               fingerprint values that are included in <spanx
-              style="verb">a=fingerprint</spanx> lines of the session
+              style="verb">fingerprint</spanx> attributes of the session
               description.
             </t>
             <t>
@@ -1624,7 +1619,7 @@ a=sendrecv
               <t>
                 For use in signaling, the assertion is serialized into JSON,
                 <xref target="RFC4648">Base64-encoded</xref>, and used as the
-                value of the <spanx style="verb">a=identity</spanx> attribute.
+                value of the <spanx style="verb">identity</spanx> attribute.
               </t>
             </section>
 
@@ -1663,7 +1658,7 @@ a=sendrecv
           <section title="Verifying Assertions" anchor="sec.verify-assert">
               <t>
                 The input to identity validation is the assertion string taken
-                from a decoded a=identity attribute.
+                from a decoded 'identity' attribute.
               </t>
               <t>
                 The IdP proxy verifies the assertion. Depending on the identity
