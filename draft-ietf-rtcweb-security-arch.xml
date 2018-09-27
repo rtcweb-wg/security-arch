@@ -1425,6 +1425,11 @@ t=0 0
 m=audio 6056 RTP/SAVP 0
 a=sendrecv
 ...
+
+  Note that long lines in the example are folded to meet the column
+  width constraints of this document; the backslash ("\") at the end of
+  a line and the carriage return that follows shall be ignored.
+  
 ]]></artwork>
             </figure>
             <t>
