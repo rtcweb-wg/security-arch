@@ -565,7 +565,7 @@
       <t>
 	    The procedures in this section are based on the assumption that the identity assertion 
         of an endpoint is bound to the fingerprints of the endpoint. This does not preclude the 
-        definition of alternative means of binding an assertion to the identity, but such means are 
+        definition of alternative means of binding an assertion to the endpoint, but such means are 
         outside the scope of this specification.
       </t>
       <t>
@@ -636,39 +636,38 @@ Syntax:
          <t>
            When an offerer sends an offer, in order to provide its identity
            assertion to the peer, it includes an 'identity' attribute in the
-           offer. In addition, it MUST include SDP 'fingerprint' attributes for
-           each fingerprint that has been used to assert the identity.
+           offer. In addition, the offerer includes one or more SDP 'fingerprint' attributes.
+           The set of fingerprints MUST be the same as the set to which the identity assertion 
+           is bound.
          </t>
          </section>
          <section title="Answerer Processing of SDP Offer" anchor="sec.sdp-id-attr-oa-anso">
          <t>
            When an answerer receives an offer that contains an 'identity'
            attribute, the answerer can use the the attribute information to
-           contact the IdP, and verify the identity of the peer.  If the
-           answerer does not accept the attribute value, or if the identity
-           verification fails, it MUST reject the offer.
+           contact the IdP, and verify the identity of the peer. If the
+           identity verification fails, the answerer MUST reject the offer.
          </t>
          </section>
          <section title="Generating of SDP Answer" anchor="sec.sdp-id-attr-oa-ansa">
          <t>
            When an answerer sends an answer, in order to provide its identity
            assertion to the peer, it includes an 'identity' attribute in the
-           answer. In addition, it MUST include 'fingerprint' attributes for
-           each fingerprint that have been used to assert the identity.
+           answer. In addition, the answerer includes one or more SDP 'fingerprint' attributes.
+           The set of fingerprints MUST be the same as the set to which the identity assertion 
+           is bound.
          </t>
          <t>
-           NOTE: The answerer can include an 'identity' attribute in the answer
-           independently of whether the corresponding offer contained an
-           'identity' attribute or not.
+           NOTE: The answerer can choose to include or omit an 'identity' attribute independently, 
+           regardless of whether the offerer did so.
          </t>
          </section>
          <section title="Offerer Processing of SDP Answer" anchor="sec.sdp-id-attr-oa-offa">
          <t>           
            When the offerer receives an answer that contains an 'identity'
            attribute, the offerer can use the attribute information to contact
-           the IdP, and verify the identity of the peer. If the offerer does
-           not accept the attribute (or the attribute value), or if the identity
-           verification fails, it MUST take proper actions to reject the answer.
+           the IdP, and verify the identity of the peer. If the identity
+           verification fails, the offerer MUST take proper actions to reject the answer.
          </t>
          </section>
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
@@ -682,16 +681,17 @@ Syntax:
          <t>
            If the endpoint wants to maintain the previously provided identity assertion, 
            it MUST include an 'identity' attribute with the previously provided attribute value
-           in the offer or answer. In addition, it MUST include 'fingerprint' attributes for
-           each fingerprint that have been used to assert the identity.
+           in the offer or answer.
          </t>
          <t>     
            If the endpoint wants to modify its identity assertion within the
            session, it MUST include an 'identity' attribute value with the new
-           identity assertion in the offer or answer. In addition, it MUST include
-           'fingerprint' attributes for each fingerprint that have been used to
-           assert the identity.
+           identity assertion in the offer or answer.
          </t>
+         <t>
+           If the endpoint maintains or modifies its identity assertion within the session,
+           it includes one or more SDP 'fingerprint' attributes. The set of fingerprints MUST 
+           be the same as the set to which the identity assertion is bound.
          <t>
            If the endpoint wants to revoke its identity assertion from the
            session, it MUST NOT include an 'identity' attribute in the offer or answer.
@@ -700,9 +700,8 @@ Syntax:
            Specific usages might restrict the modification and/or revoking
            of the identity assertion within a session. Endpoints can add, modify, or 
            remove 'fingerprint' attributes when modifying a session. If a modified session 
-           retains the 'identity' attribute, there MUST be at least one 'fingerprint' attribute 
-           that applies to each media section and any 'fingerprint' attributes that are included 
-           MUST be covered by the 'identity' attribute.
+           retains the 'identity' attribute, there MUST be at least one 'fingerprint' attribute
+           included.
          </t>
          </section>         
         </section>
