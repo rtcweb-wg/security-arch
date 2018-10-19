@@ -563,9 +563,9 @@
         assertion value is encoded as Base-64, as described in Section 4 of <xref target="RFC4648"/>.
       </t>
       <t>
-	    The procedures in this section are based on the assumption that the identity assertion 
-        of an endpoint is bound to the fingerprints of the endpoint. This does not preclude the 
-        definition of alternative means of binding an assertion to the endpoint, but such means are 
+	    The procedures in this section are based on the assumption that the identity assertion
+        of an endpoint is bound to the fingerprints of the endpoint. This does not preclude the
+        definition of alternative means of binding an assertion to the endpoint, but such means are
         outside the scope of this specification.
       </t>
       <t>
@@ -588,7 +588,7 @@
       <artwork type="inline"><![CDATA[
 Syntax:
 
-  identity-assertion        = identity-assertion-value 
+  identity-assertion        = identity-assertion-value
                               *(SP identity-extension)
   identity-assertion-value  = base64
   identity-extension        = extension-name [ "=" extension-value ]
@@ -598,7 +598,7 @@ Syntax:
 
   <ALPHA and DIGIT as defined in [RFC4566]>
   <base64 as defined in [RFC4566]>
-  
+
  Example:
 
   a=identity:\
@@ -606,19 +606,19 @@ Syntax:
     In0sImFzc2VydGlvbiI6IntcImlkZW50aXR5XCI6XCJib2JAZXhhbXBsZS5vcmdc\
     IixcImNvbnRlbnRzXCI6XCJhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3l6XCIsXCJz\
     aWduYXR1cmVcIjpcIjAxMDIwMzA0MDUwNlwifSJ9
-    
+
   Note that long lines in the example are folded to meet the column
   width constraints of this document; the backslash ("\") at the end of
   a line and the carriage return that follows shall be ignored.
-  
+
       ]]></artwork>
        </figure>
        <t>
          This specification does not define any extensions for the attribute.
        </t>
        <t>
-         The identity-assertion value is a JSON <xref target="RFC8259"/> encoded string. The JSON object 
-         contains two keys: "assertion" and "idp". The <spanx style="verb">assertion</spanx> key value contains 
+         The identity-assertion value is a JSON <xref target="RFC8259"/> encoded string. The JSON object
+         contains two keys: "assertion" and "idp". The <spanx style="verb">assertion</spanx> key value contains
          an opaque string that is consumed by the IdP. The <spanx style="verb">idp</spanx> key value contains a
          dictionary with one or two further values that identify the IdP. See
          <xref target="sec.request-assert"/> for more details.
@@ -637,7 +637,7 @@ Syntax:
            When an offerer sends an offer, in order to provide its identity
            assertion to the peer, it includes an 'identity' attribute in the
            offer. In addition, the offerer includes one or more SDP 'fingerprint' attributes.
-           The set of fingerprints MUST be the same as the set to which the identity assertion 
+           The set of fingerprints MUST be the same as the set to which the identity assertion
            is bound.
          </t>
          </section>
@@ -654,16 +654,16 @@ Syntax:
            When an answerer sends an answer, in order to provide its identity
            assertion to the peer, it includes an 'identity' attribute in the
            answer. In addition, the answerer includes one or more SDP 'fingerprint' attributes.
-           The set of fingerprints MUST be the same as the set to which the identity assertion 
+           The set of fingerprints MUST be the same as the set to which the identity assertion
            is bound.
          </t>
          <t>
-           NOTE: The answerer can choose to include or omit an 'identity' attribute independently, 
+           NOTE: The answerer can choose to include or omit an 'identity' attribute independently,
            regardless of whether the offerer did so.
          </t>
          </section>
          <section title="Offerer Processing of SDP Answer" anchor="sec.sdp-id-attr-oa-offa">
-         <t>           
+         <t>
            When the offerer receives an answer that contains an 'identity'
            attribute, the offerer can use the attribute information to contact
            the IdP, and verify the identity of the peer. If the identity
@@ -673,40 +673,41 @@ Syntax:
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
          <t>
            When an endpoint has provided its identity assertion in a previous
-           successful offer/answer exchange, and when the endpoint later in the 
-           session sends an offer or answer, the endpoint can either keep the 
-           identity assertion value unchanged, modify the value, or revoke the 
+           successful offer/answer exchange, and when the endpoint later in the
+           session sends an offer or answer, the endpoint can either keep the
+           identity assertion value unchanged, modify the value, or revoke the
            identity assertion. This section describes the procedures for doing so.
          </t>
          <t>
-           If the endpoint wants to maintain the previously provided identity assertion, 
+           If the endpoint wants to maintain the previously provided identity assertion,
            it MUST include an 'identity' attribute with the previously provided attribute value
            in the offer or answer.
          </t>
-         <t>     
+         <t>
            If the endpoint wants to modify its identity assertion within the
            session, it MUST include an 'identity' attribute value with the new
            identity assertion in the offer or answer.
          </t>
          <t>
            If the endpoint maintains or modifies its identity assertion within the session,
-           it includes one or more SDP 'fingerprint' attributes. The set of fingerprints MUST 
+           it includes one or more SDP 'fingerprint' attributes. The set of fingerprints MUST
            be the same as the set to which the identity assertion is bound.
+         </t>
          <t>
            If the endpoint wants to revoke its identity assertion from the
            session, it MUST NOT include an 'identity' attribute in the offer or answer.
          </t>
          <t>
            Specific usages might restrict the modification and/or revoking
-           of the identity assertion within a session. Endpoints can add, modify, or 
-           remove 'fingerprint' attributes when modifying a session. If a modified session 
+           of the identity assertion within a session. Endpoints can add, modify, or
+           remove 'fingerprint' attributes when modifying a session. If a modified session
            retains the 'identity' attribute, there MUST be at least one 'fingerprint' attribute
            included.
          </t>
-         </section>         
+         </section>
         </section>
     </section>
-    
+
     <section title="Detailed Technical Description" anchor="sec.proposal.detailed">
 
       <section title="Origin and Web Security Issues" anchor="sec.proposal.origin">
@@ -1428,7 +1429,7 @@ a=sendrecv
   Note that long lines in the example are folded to meet the column
   width constraints of this document; the backslash ("\") at the end of
   a line and the carriage return that follows shall be ignored.
-  
+
 ]]></artwork>
             </figure>
             <t>
