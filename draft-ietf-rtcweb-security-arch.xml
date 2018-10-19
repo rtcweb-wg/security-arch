@@ -664,39 +664,7 @@ Syntax:
            </t>
          </section>
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
-         <t>
-           When an endpoint has provided its identity assertion in a previous
-           successful offer/answer exchange, and when the endpoint later in the
-           session sends an offer or answer, the endpoint can either keep the
-           identity assertion value unchanged, modify the value, or revoke the
-           identity assertion. This section describes the procedures for doing so.
-         </t>
-         <t>
-           If the endpoint wants to maintain the previously provided identity assertion,
-           it MUST include an 'identity' attribute with the previously provided attribute value
-           in the offer or answer.
-         </t>
-         <t>
-           If the endpoint wants to modify its identity assertion within the
-           session, it MUST include an 'identity' attribute value with the new
-           identity assertion in the offer or answer.
-         </t>
-         <t>
-           If the endpoint maintains or modifies its identity assertion within the session,
-           it includes one or more SDP 'fingerprint' attributes. The set of fingerprints MUST
-           be the same as the set to which the identity assertion is bound.
-         </t>
-         <t>
-           If the endpoint wants to revoke its identity assertion from the
-           session, it MUST NOT include an 'identity' attribute in the offer or answer.
-         </t>
-         <t>
-           Specific usages might restrict the modification and/or revoking
-           of the identity assertion within a session. Endpoints can add, modify, or
-           remove 'fingerprint' attributes when modifying a session. If a modified session
-           retains the 'identity' attribute, there MUST be at least one 'fingerprint' attribute
-           included.
-         </t>
+           <t>[TODO]</t>
          </section>
         </section>
     </section>
