@@ -650,25 +650,18 @@ Syntax:
          </t>
          </section>
          <section title="Generating of SDP Answer" anchor="sec.sdp-id-attr-oa-ansa">
-         <t>
-           When an answerer sends an answer, in order to provide its identity
-           assertion to the peer, it includes an 'identity' attribute in the
-           answer. In addition, the answerer includes one or more SDP 'fingerprint' attributes.
-           The set of fingerprints MUST be the same as the set to which the identity assertion
-           is bound.
-         </t>
-         <t>
-           NOTE: The answerer can choose to include or omit an 'identity' attribute independently,
-           regardless of whether the offerer did so.
-         </t>
+           <t>
+             If the answerer elects to include an 'identity' attribute, it follows
+             the same steps as those in <xref target="sec.sdp-id-attr-oa-inio"/>.
+             The answerer can choose to include or omit an 'identity' attribute independently,
+             regardless of whether the offerer did so.
+           </t>
          </section>
          <section title="Offerer Processing of SDP Answer" anchor="sec.sdp-id-attr-oa-offa">
-         <t>
-           When the offerer receives an answer that contains an 'identity'
-           attribute, the offerer can use the attribute information to contact
-           the IdP, and verify the identity of the peer. If the identity
-           verification fails, the offerer MUST take proper actions to reject the answer.
-         </t>
+           <t>
+             Offer processing of an 'identity' attribute is the same as
+             that described in <xref target="sec.sdp-id-attr-oa-anso"/>.
+           </t>
          </section>
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
          <t>
