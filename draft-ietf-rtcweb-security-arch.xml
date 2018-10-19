@@ -558,21 +558,21 @@
 
     <section title="SDP Identity Attribute" anchor="sec.sdp-id-attr">
       <t>
-	    The SDP 'identity' attribute is a session-level attribute that is used
-	    by an endpoint to convey its identity assertion to its peer. The identity
+        The SDP 'identity' attribute is a session-level attribute that is used
+        by an endpoint to convey its identity assertion to its peer. The identity
         assertion value is encoded as Base-64, as described in Section 4 of <xref target="RFC4648"/>.
       </t>
       <t>
-	    The procedures in this section are based on the assumption that the identity assertion
+        The procedures in this section are based on the assumption that the identity assertion
         of an endpoint is bound to the fingerprints of the endpoint. This does not preclude the
         definition of alternative means of binding an assertion to the endpoint, but such means are
         outside the scope of this specification.
       </t>
       <t>
-	    The semantics of multiple 'identity' attributes within an offer or answer are undefined.
-	    Implementations SHOULD only include a single 'identity' attribute in an
-	    offer or answer and relying parties MAY elect to ignore all but the first
-	    'identity' attribute.
+        The semantics of multiple 'identity' attributes within an offer or answer are undefined.
+        Implementations SHOULD only include a single 'identity' attribute in an
+        offer or answer and relying parties MAY elect to ignore all but the first
+        'identity' attribute.
       </t>
       <t>
         <list style="hanging">
@@ -625,9 +625,9 @@ Syntax:
        </t>
        <section title="Offer/Answer Considerations" anchor="sec.sdp-id-attr-oa">
          <t>
-		   This section defines the SDP Offer/Answer <xref target="RFC6454"/> considerations for the SDP
-		   'identity' attribute.
-	     </t>
+           This section defines the SDP Offer/Answer <xref target="RFC6454"/> considerations for the SDP
+           'identity' attribute.
+         </t>
          <t>
            Within this section, 'initial offer' refers to the first offer in the
            SDP session that contains an SDP <spanx style="verb">identity</spanx> attribute.
@@ -737,11 +737,11 @@ Syntax:
           location controlled by the attacker.  Implementations MUST either
           choose to terminate the call or display a warning at that point.
         </t>
-	<t>
-	  Also note that the security architecture depends on the keying material
+        <t>
+          Also note that the security architecture depends on the keying material
           not being available to move between origins.  But, it is assumed that
           the identity assertion can be passed to anyone that the page cares to.
-	</t>
+        </t>
       </section>
 
       <section title="Device Permissions Model" anchor="sec.proposal.device.permissions">
