@@ -558,21 +558,25 @@
 
     <section title="SDP Identity Attribute" anchor="sec.sdp-id-attr">
       <t>
-        The SDP 'identity' attribute is a session-level attribute that is used
-        by an endpoint to convey its identity assertion to its peer. The identity
-        assertion value is encoded as Base-64, as described in Section 4 of <xref target="RFC4648"/>.
+        The SDP 'identity' attribute is a session-level attribute that
+        is used by an endpoint to convey its identity assertion to its
+        peer. The identity assertion value is encoded as Base-64, as described
+        in Section 4 of <xref target="RFC4648"/>.
       </t>
       <t>
-        The procedures in this section are based on the assumption that the identity assertion
-        of an endpoint is bound to the fingerprints of the endpoint. This does not preclude the
-        definition of alternative means of binding an assertion to the endpoint, but such means are
-        outside the scope of this specification.
+        The procedures in this section are based on the assumption
+        that the identity assertion of an endpoint is bound to the
+        fingerprints of the endpoint. This does not preclude the definition of
+        alternative means of binding an assertion to the endpoint, but such
+        means are outside the scope of this specification. Implementations
+        of this specification MUST use the same set of fingerprints
+        for every media section.
       </t>
       <t>
-        The semantics of multiple 'identity' attributes within an offer or answer are undefined.
-        Implementations SHOULD only include a single 'identity' attribute in an
-        offer or answer and relying parties MAY elect to ignore all but the first
-        'identity' attribute.
+        The semantics of multiple 'identity' attributes within an
+        offer or answer are undefined.  Implementations SHOULD only include a
+        single 'identity' attribute in an offer or answer and relying parties
+        MAY elect to ignore all but the first 'identity' attribute.
       </t>
       <t>
         <list style="hanging">
@@ -634,11 +638,12 @@ Syntax:
          </t>
          <section title="Generating the Initial SDP Offer" anchor="sec.sdp-id-attr-oa-inio">
          <t>
-           When an offerer sends an offer, in order to provide its identity
-           assertion to the peer, it includes an 'identity' attribute in the
-           offer. In addition, the offerer includes one or more SDP 'fingerprint' attributes.
-           The set of fingerprints MUST be the same as the set to which the identity assertion
-           is bound.
+           When an offerer sends an offer, in order to provide its
+           identity assertion to the peer, it includes an 'identity' attribute in
+           the offer. In addition, the offerer includes one or more SDP
+           'fingerprint' attributes.  The 'identity' attribute MUST be bound to
+           all the 'fingerprint' attributes in the session
+           description.
          </t>
          </section>
          <section title="Answerer Processing of SDP Offer" anchor="sec.sdp-id-attr-oa-anso">
@@ -664,7 +669,20 @@ Syntax:
            </t>
          </section>
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
-           <t>[TODO]</t>
+           <t>
+             When modifying a session, if the set of fingerprints is
+             unchanged, then the sender MAY send the same 'identity' attribute. In
+             this case, the established identity SHOULD be applied to existing DTLS
+             connections as well as new connections established using one of those
+             fingerprints.
+           </t>
+           <t>
+             If the set of fingerprints changes, then the sender MUST
+             either send a new 'identity' attribute or none at all.
+             Because a change in fingerprints also causes a new DTLS
+             connection to be established, the receiver MUST discard
+             all previously established identities.
+           </t>
          </section>
         </section>
     </section>
