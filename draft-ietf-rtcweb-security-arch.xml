@@ -568,9 +568,7 @@
         that the identity assertion of an endpoint is bound to the
         fingerprints of the endpoint. This does not preclude the definition of
         alternative means of binding an assertion to the endpoint, but such
-        means are outside the scope of this specification. Implementations
-        of this specification MUST use the same set of fingerprints
-        for every media section.
+        means are outside the scope of this specification.
       </t>
       <t>
         The semantics of multiple 'identity' attributes within an
@@ -674,7 +672,9 @@ Syntax:
              unchanged, then the sender MAY send the same 'identity' attribute. In
              this case, the established identity SHOULD be applied to existing DTLS
              connections as well as new connections established using one of those
-             fingerprints.
+             fingerprints. Note that <xref target="I-D.ietf-rtcweb-jsep"/>, Section
+             5.2.1 requires that each media section use the same set of
+             fingerprints for every media section.
            </t>
            <t>
              If the set of fingerprints changes, then the sender MUST
@@ -2054,12 +2054,19 @@ a=sendrecv
         Bernard Aboba, Harald Alvestrand, Richard Barnes, Dan Druta, Cullen
         Jennings, Hadriel Kaplan, Matthew Kaufman, Jim McEachern, Martin
         Thomson, Magnus Westerland.  Matthew Kaufman provided the UI material in
-        <xref target="sec.proposal.comsec"/>.
+        <xref target="sec.proposal.comsec"/>. Christer Holmberg provided
+        the initial version of <xref target="sec.sdp-id-attr-oa"/>.
       </t>
     </section>
 
     <section title="Changes">
       <t> [RFC Editor: Please remove this section prior to publication.]</t>
+      <section title="Changes since -15">
+        <t>Rewrite the Identity section in more conventional offer/answer format.</t>
+        <t>Clarify rules on changing identities.</t>
+      </section>
+
+
       <section title="Changes since -11">
         <t>
           Update discussion of IdP security model
