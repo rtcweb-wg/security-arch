@@ -974,7 +974,7 @@ Syntax:
           All data channels MUST be secured via DTLS.
         </t>
         <t>
- c         All Implementations MUST implement DTLS 1.2 with the
+         All Implementations MUST implement DTLS 1.2 with the
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite and the
           <xref target="FIPS186">P-256 curve</xref>.
           Earlier drafts of this specification required
