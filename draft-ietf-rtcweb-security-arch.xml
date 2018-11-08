@@ -1690,7 +1690,7 @@ a=sendrecv
                   string is in the form "&lt;user>@&lt;domain>", where <spanx
                   style="verb">user</spanx> consists of any character except
                   '@', and domain is an <xref target="RFC5890">internationalized
-                  domain name</xref>.
+                  domain name</xref> encoded as a sequence of U-labels.
                 </t>
                 <t>
                   The PeerConnection API MUST check this string as follows:
