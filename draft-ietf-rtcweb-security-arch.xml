@@ -644,14 +644,6 @@ Syntax:
            description.
          </t>
          </section>
-         <section title="Answerer Processing of SDP Offer" anchor="sec.sdp-id-attr-oa-anso">
-         <t>
-           When an answerer receives an offer that contains an 'identity'
-           attribute, the answerer can use the the attribute information to
-           contact the IdP, and verify the identity of the peer. If the
-           identity verification fails, the answerer MUST reject the offer.
-         </t>
-         </section>
          <section title="Generating of SDP Answer" anchor="sec.sdp-id-attr-oa-ansa">
            <t>
              If the answerer elects to include an 'identity' attribute, it follows
@@ -660,10 +652,13 @@ Syntax:
              regardless of whether the offerer did so.
            </t>
          </section>
-         <section title="Offerer Processing of SDP Answer" anchor="sec.sdp-id-attr-oa-offa">
+         <section title="Processing an SDP Offer or Answer" anchor="sec.sdp-id-attr-oa-offa">
            <t>
-             Offer processing of an 'identity' attribute is the same as
-             that described in <xref target="sec.sdp-id-attr-oa-anso"/>.
+             When an endpoint receives an offer or answer that contains an 'identity'
+             attribute, the answerer can use the the attribute information to
+             contact the IdP, and verify the identity of the peer. If the
+             identity verification fails, the answerer MUST discard the
+             offer or answer as malformed.
            </t>
          </section>
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
@@ -979,12 +974,19 @@ Syntax:
           All data channels MUST be secured via DTLS.
         </t>
         <t>
-          All implementations MUST implement DTLS 1.0, with the cipher suite
-          TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA with the the <xref
-          target="FIPS186">P-256 curve</xref>.  The DTLS-SRTP protection profile
+         All Implementations MUST implement DTLS 1.2 with the
+          TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite and the
+          <xref target="FIPS186">P-256 curve</xref>.
+          Earlier drafts of this specification required
+          DTLS 1.0 with the cipher suite
+          TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, and at the time of this
+          writing some implementations do not support DTLS 1.2;
+          endpoints which support only DTLS 1.2 might encounter
+          interoperability issues.
+          The DTLS-SRTP protection profile
           SRTP_AES128_CM_HMAC_SHA1_80 MUST be supported for
-          SRTP. Implementations SHOULD implement DTLS 1.2 with the
-          TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite.  Implementations
+          SRTP.
+          Implementations
           MUST favor cipher suites which support (Perfect Forward Secrecy) PFS
           over non-PFS cipher suites and SHOULD favor AEAD over non-AEAD cipher suites.
         </t>
