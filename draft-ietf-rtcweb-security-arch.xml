@@ -644,14 +644,6 @@ Syntax:
            description.
          </t>
          </section>
-         <section title="Answerer Processing of SDP Offer" anchor="sec.sdp-id-attr-oa-anso">
-         <t>
-           When an answerer receives an offer that contains an 'identity'
-           attribute, the answerer can use the the attribute information to
-           contact the IdP, and verify the identity of the peer. If the
-           identity verification fails, the answerer MUST reject the offer.
-         </t>
-         </section>
          <section title="Generating of SDP Answer" anchor="sec.sdp-id-attr-oa-ansa">
            <t>
              If the answerer elects to include an 'identity' attribute, it follows
@@ -660,10 +652,13 @@ Syntax:
              regardless of whether the offerer did so.
            </t>
          </section>
-         <section title="Offerer Processing of SDP Answer" anchor="sec.sdp-id-attr-oa-offa">
+         <section title="Processing an SDP Offer or Answer" anchor="sec.sdp-id-attr-oa-offa">
            <t>
-             Offer processing of an 'identity' attribute is the same as
-             that described in <xref target="sec.sdp-id-attr-oa-anso"/>.
+             When an endpoint receives an offer or answer that contains an 'identity'
+             attribute, the answerer can use the the attribute information to
+             contact the IdP, and verify the identity of the peer. If the
+             identity verification fails, the answerer MUST discard the
+             offer or answer as malformed.
            </t>
          </section>
          <section title="Modifying the Session" anchor="sec.sdp-id-attr-oa-modi">
