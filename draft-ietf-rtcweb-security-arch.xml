@@ -1722,12 +1722,25 @@ a=sendrecv
                   </list>
                 </t>
                 <t>
-                  Sites that have identities that do not fit into the RFC822
-                  style (for instance, identifiers that are simple numeric
-                  values, or values that contain '@' characters) SHOULD convert
-                  them to this form by escaping illegal characters and appending
-                  their IdP domain (e.g., user%40133@identity.example.com), thus
-                  ensuring that they are authoritative for the identity.
+                  Sites that use identities that are not of the form
+                  &lt;user&gt;@&lt;domain&gt;, or which use identities in
+                  which the domain portion does not match the domain name of
+                  the IdP proxy, MUST first escape any "@" or "%" character
+                  according to the "Percent-Encoding" rules defined in section
+                  2.1 of <xref target="RFC3986">, and then append their IdP
+                  proxy as a domain. For example, if the domain
+                  "identity.example.com" uses identities of the form
+                  "user@133", then the resulting string will be encoded as
+                  "user%40133@identity.example.com".
+                </t>
+                <t>
+                  Implementations are cautioned to take care when displaying
+                  user identities containing escaped "@" characters. If such
+                  characters are unescaped prior to display, implementations
+                  MUST distinguish between the domain of the IdP proxy and any
+                  domain that might be implied by the portion of the
+                  &lt;user&gt; portion that appears after the escaped "@"
+                  sign.
                 </t>
               </section>
 
