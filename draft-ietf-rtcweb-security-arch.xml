@@ -1728,7 +1728,8 @@ a=sendrecv
                   the IdP proxy, MUST first escape any "@" or "%" character
                   according to the "Percent-Encoding" rules defined in Section
                   2.1 of <xref target="RFC3986">, and then append their IdP
-                  proxy as a domain. For example, if the domain
+                  proxy as a domain. Characters other than "@" and "%" MUST NOT
+                  be percent-encoded. For example, if the domain
                   "identity.example.com" uses identities of the form
                   "user@133", then the resulting string will be encoded as
                   "user%40133@identity.example.com".
