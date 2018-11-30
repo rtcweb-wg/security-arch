@@ -997,7 +997,7 @@ Syntax:
           it with a "no_renegotiation" alert if offered.</t>
 
         <t>
-          Implementations MUST NOT implement TLS False Start <xref target="RFC7918"/>.</t>
+          Endpoints MUST NOT implement TLS False Start <xref target="RFC7918"/>.</t>
 
         <t>
           <list style="hanging">
