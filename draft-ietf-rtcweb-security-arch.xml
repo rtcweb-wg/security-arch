@@ -24,6 +24,7 @@
 <!ENTITY RFC7022 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7022.xml">
 <!ENTITY RFC7617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7617.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
+<!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7918.xml">
 <!ENTITY RFC8174 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC8122 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8122.xml">
 <!ENTITY RFC8259 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml">
@@ -994,6 +995,9 @@ Syntax:
         <t>
           Implementations MUST NOT implement DTLS renegotiation and MUST reject
           it with a "no_renegotiation" alert if offered.</t>
+
+        <t>
+          Endpoints MUST NOT implement TLS False Start <xref target="RFC7918"/>.</t>
 
         <t>
           <list style="hanging">
@@ -2232,6 +2236,7 @@ a=sendrecv
       &RFC6454;
       &RFC7022;
       &RFC7675;
+      &RFC7918;
       &RFC8174;
       &RFC8122;
       &RFC8259;
