@@ -1374,7 +1374,10 @@ Syntax:
           </t>
           <t>
             This object is encoded in a <xref target="RFC8259">JSON</xref>
-            string for passing to the IdP.
+            string for passing to the IdP.  The identity assertion returned by
+            the IdP, which is encoded in the <spanx
+            style="verb">identity</spanx> attribute, is a JSON object that is
+            encoded as described in <xref target="sec.carry-assertion"/>.
           </t>
           <t>
             This structure does not need to be interpreted by the IdP or the
@@ -1384,13 +1387,16 @@ Syntax:
             IdP.
           </t>
 
-          <section title="Carrying Identity Assertions">
+          <section title="Carrying Identity Assertions" anchor="sec.carry-assertion">
             <t>
-              Once an IdP has generated an assertion, it is attached to the SDP
-              offer/answer message. This is done by adding a new 'identity' attribute to the
-              SDP. The sole contents of this value are a <xref
-              target="RFC4648">Base64-encoded</xref> identity assertion.  For
-              example:
+              Once an IdP has generated an assertion (see <xref
+              target="sec.request-assert"/>), it is attached to the SDP
+              offer/answer message. This is done by adding a new 'identity'
+              attribute to the SDP. The sole contents of this value is the
+              identity assertion.  The identity assertion produced by the IdP is
+              encoded into a UTF-8 JSON text, then <xref
+              target="RFC4648">Base64-encoded</xref> to produce this string.
+              For example:
             </t>
             <figure>
               <artwork><![CDATA[
@@ -1532,7 +1538,9 @@ a=sendrecv
                   Unlike the AP, the RP need not have any particular
                   relationship with the IdP. Rather, it needs to be able to
                   process whatever assertion is provided by the AP.  As the
-                  assertion contains the IdP's identity, the URI can be
+                  assertion contains the IdP's identity in the <spanx
+                  style="verb">idp</spanx> field of the JSON-encoded object (see
+                  <xref target="sec.request-assert"/>), the URI can be
                   constructed directly from the assertion, and thus the RP can
                   directly verify the technical validity of the assertion with
                   no user interaction. Authoritative assertions need only be
