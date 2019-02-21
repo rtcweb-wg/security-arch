@@ -214,7 +214,7 @@
         <t>
           Note that merely being authenticated does not make these entities
           trusted. For instance, just because we can verify that
-          https://www.evil.org/ is owned by Dr. Evil does not mean that we can
+          https://www.example.org/ is owned by Dr. Evil does not mean that we can
           trust Dr. Evil to access our camera and microphone. However, it gives
           the user an opportunity to determine whether he wishes to trust
           Dr. Evil or not; after all, if he desires to contact Dr. Evil (perhaps
@@ -365,7 +365,7 @@
           For simplicity, assume the topology in <xref
           target="fig.proposal.idp"/>.  Alice and Bob are both users of a common
           calling service; they both have approved the calling service to make
-          calls (we defer the discussion of device access permissions till
+          calls (we defer the discussion of device access permissions until
           later).  They are both connected to the calling service via HTTPS and
           so know the origin with some level of confidence. They also have
           accounts with some identity provider.  This sort of identity service
@@ -692,8 +692,8 @@ Syntax:
           being able to authenticate content from that origin, the origin can
           only be securely established if data is transferred over HTTPS <xref
           target="RFC2818"/>. Thus, clients MUST treat HTTP and HTTPS origins as
-          different permissions domains. [Note: this follows directly from the
-          origin security model and is stated here merely for clarity.]
+          different permissions domains. Note: this follows directly from the
+          origin security model and is stated here merely for clarity.
         </t>
         <t>
           Many web browsers currently forbid by default any active mixed content
@@ -746,7 +746,7 @@ Syntax:
           In addition, they SHOULD support requests for access that promise that
           media from this grant will be sent to a single communicating peer
           (obviously there could be other requests for other peers).  E.g.,
-          "Call customerservice@ford.com".  The semantics of this request are
+          "Call customerservice@example.org".  The semantics of this request are
           that the media stream from the camera and microphone will only be
           routed through a connection which has been cryptographically verified
           (through the IdP mechanism or an X.509 certificate in the DTLS-SRTP
@@ -828,7 +828,7 @@ Syntax:
           Clients MAY permit the formation of data channels without any direct
           user approval. Because sites can always tunnel data through the
           server, further restrictions on the data channel do not provide any
-          additional security.  (though see <xref
+          additional security.  (See <xref
           target="sec.proposal.communications.consent"/> for a related issue).
         </t>
         <t>
@@ -938,7 +938,7 @@ Syntax:
               address until they have decided to answer. They also allow users
               to completely hide their IP address for the duration of the
               call. Finally, they allow a mechanism for the user to optimize
-              performance by reconfiguring to allow non-turn candidates during
+              performance by reconfiguring to allow non-TURN candidates during
               an active call if the user decides they no longer need to hide
               their IP address
             </t>
@@ -957,10 +957,10 @@ Syntax:
 
       <section title="Communications Security" anchor="sec.proposal.comsec">
         <t>
-          Implementations MUST implement SRTP <xref target="RFC3711"/>.
-          Implementations MUST implement DTLS <xref target="RFC6347"/> and
+          Implementations MUST support SRTP <xref target="RFC3711"/>.
+          Implementations MUST support DTLS <xref target="RFC6347"/> and
           DTLS-SRTP <xref target="RFC5763"/><xref target="RFC5764"/> for SRTP
-          keying. Implementations MUST implement <xref
+          keying. Implementations MUST support <xref
           target="RFC8261"/>.
         </t>
         <t>
@@ -975,7 +975,7 @@ Syntax:
           All data channels MUST be secured via DTLS.
         </t>
         <t>
-         All Implementations MUST implement DTLS 1.2 with the
+         All Implementations MUST support DTLS 1.2 with the
           TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 cipher suite and the
           <xref target="FIPS186">P-256 curve</xref>.
           Earlier drafts of this specification required
@@ -1070,8 +1070,6 @@ Syntax:
                 <t>
                   The "security characteristics" MUST indicate the cryptographic
                   algorithms in use (For example: "AES-CBC".)
-                  However, if Null ciphers are used, that MUST be presented to
-                  the user at the top-level UI.
                 </t>
 
                 <t>
@@ -1083,6 +1081,7 @@ Syntax:
                   The "security characteristics" MUST include some mechanism to
                   allow an out-of-band verification of the peer, such as a
                   certificate fingerprint or a Short Authentication String (SAS).
+                  These are compared by the peers to authenticate one another.
                 </t>
               </list>
             </t>
@@ -1110,8 +1109,8 @@ Syntax:
           identity. For instance, if I have an account at example.org, I could
           use the example.org identity provider to prove to others that I was
           alice@example.org.  The development of these technologies allows us to
-          separate calling from identity provision: I could call you on Poker
-          Galaxy but identify myself as alice@example.org.
+          separate calling from identity provision: I could call you on a poker
+          site but identify myself as alice@example.org.
         </t>
         <t>
           Whatever the underlying technology, the general principle is that the
@@ -1703,21 +1702,21 @@ a=sendrecv
                   consist of a string representing the user's identity.  This
                   string is in the form "&lt;user>@&lt;domain>", where <spanx
                   style="verb">user</spanx> consists of any character except
-                  '@', and domain is an <xref target="RFC5890">internationalized
+                  '@', and "domain" is an <xref target="RFC5890">internationalized
                   domain name</xref> encoded as a sequence of U-labels.
                 </t>
                 <t>
                   The PeerConnection API MUST check this string as follows:
                   <list style="numbers">
                     <t>
-                      If the domain portion of the string is equal to the domain
+                      If the "domain" portion of the string is equal to the domain
                       name of the IdP proxy, then the assertion is valid, as the
                       IdP is authoritative for this domain.  Comparison of
                       domain names is done using the label equivalence rule
                       defined in Section 2.3.2.4 of <xref target="RFC5890"/>.
                     </t>
                     <t>
-                      If the domain portion of the string is not equal to the
+                      If the "domain" portion of the string is not equal to the
                       domain name of the IdP proxy, then the PeerConnection
                       object MUST reject the assertion unless:
                       <list style="numbers">
@@ -1738,8 +1737,8 @@ a=sendrecv
                   identity MUST be escaped according to the "Percent-Encoding"
                   rules defined in Section 2.1 of <xref
                   target="RFC3986"/>. Characters other than "@" and "%" MUST NOT
-                  be percent-encoded. For example, with a user of "user@133" and
-                  a domain of "identity.example.com", the resulting string will
+                  be percent-encoded. For example, with a "user" of "user@133" and
+                  a "domain" of "identity.example.com", the resulting string will
                   be encoded as "user%40133@identity.example.com".
                 </t>
                 <t>
@@ -1748,7 +1747,7 @@ a=sendrecv
                   characters are unescaped prior to display, implementations
                   MUST distinguish between the domain of the IdP proxy and any
                   domain that might be implied by the portion of the
-                  &lt;user&gt; portion that appears after the escaped "@"
+                  "&lt;user&gt"; portion that appears after the escaped "@"
                   sign.
                 </t>
               </section>
@@ -2057,7 +2056,7 @@ a=sendrecv
           target="RFC4566"/>.  The required information for the registration is
           included here:
           <list style="hanging">
-            <t hangText="Contact Name:">Eric Rescorla (ekr@rftm.com)</t>
+            <t hangText="Contact Name:">IESG (iesg@ietf.org)</t>
             <t hangText="Attribute Name:">identity</t>
             <t hangText="Long Form:">identity</t>
             <t hangText="Type of Attribute:">session-level</t>
