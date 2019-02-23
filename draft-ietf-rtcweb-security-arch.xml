@@ -1747,7 +1747,7 @@ a=sendrecv
                   characters are unescaped prior to display, implementations
                   MUST distinguish between the domain of the IdP proxy and any
                   domain that might be implied by the portion of the
-                  "&lt;user&gt"; portion that appears after the escaped "@"
+                  "&lt;user&gt;" portion that appears after the escaped "@"
                   sign.
                 </t>
               </section>
