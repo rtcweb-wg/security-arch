@@ -2071,6 +2071,13 @@ a=sendrecv
             <t hangText="Mux Category:">NORMAL.</t>
           </list>
         </t>
+        <t>
+          This section reqisters the <spanx style="verb">idp-proxy</spanx> well-known
+          URI from <xref target="RFC5785">.
+          <list style="hanging">
+             <t hangText="URI suffix:">idp-proxy</t>
+             <t hangText="Change controller:">IETF</t>
+        </t>
       </section>
 
     <section title="Acknowledgements">
