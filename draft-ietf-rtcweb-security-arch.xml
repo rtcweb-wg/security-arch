@@ -8,7 +8,6 @@
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
 <!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
 <!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
-<!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
 <!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
 <!ENTITY RFC5479 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5479.xml">
 <!ENTITY RFC5705 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5705.xml">
@@ -94,8 +93,8 @@
 
     <section title="Introduction" anchor="sec.introduction">
       <t>
-        The Real-Time Communications on the Web (WebRTC) working group is tasked
-        with standardizing protocols for real-time communications between Web
+        The Real-Time Communications on the Web (WebRTC) working group
+        standardized protocols for real-time communications between Web
         browsers. The major use cases for WebRTC technology are real-time audio
         and/or video calls, Web conferencing, and direct data transfer. Unlike
         most conventional real-time systems, (e.g., SIP-based <xref
@@ -129,7 +128,7 @@
         in <xref target="fig.multidomain"/>.  The protocol to be used between
         the domains is not standardized by WebRTC, but given the installed base
         and the form of the WebRTC API is likely to be something SDP-based like
-        SIP.
+        SIP or something like Extensible Messaging and Presence Protocol (XMPP).
       </t>
       <figure title="A multidomain WebRTC system" anchor="fig.multidomain">
         <artwork><![CDATA[
@@ -381,7 +380,7 @@
           Alice is logged onto the calling service and decides to call Bob.  She
           can see from the calling service that he is online and the calling
           service presents a JS UI in the form of a button next to Bob's name
-          which says "Call". Alice clicks the button, which initiates a JS
+          that says "Call". Alice clicks the button, which initiates a JS
           callback that instantiates a PeerConnection object. This does not
           require a security check: JS from any origin is allowed to get this
           far.
@@ -2234,7 +2233,6 @@ a=sendrecv
       &RFC4566;
       &RFC4568;
       &RFC4648;
-      &RFC5234;
       &RFC5246;
       &RFC5763;
       &RFC5764;
