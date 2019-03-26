@@ -1106,11 +1106,11 @@ Syntax:
           Recently, a number of Web-based identity technologies (OAuth,
           Facebook Connect etc.) have been developed. While the
           details vary, what these technologies share is that they have a
-          Web-based (i.e., HTTP/HTTPS) identity provider which attests to your
-          identity. For instance, if I have an account at example.org, I could
-          use the example.org identity provider to prove to others that I was
+          Web-based (i.e., HTTP/HTTPS) identity provider which attests to Alice's
+          identity. For instance, if Alice has an account at example.org, Alice could
+          use the example.org identity provider to prove to others that Alice is
           alice@example.org.  The development of these technologies allows us to
-          separate calling from identity provision: I could call you on Poker
+          separate calling from identity provision: Alice could call you on Poker
           Galaxy but identify myself as alice@example.org.
         </t>
         <t>
@@ -1787,7 +1787,7 @@ a=sendrecv
             any such identity assertions, though it cannot forge new ones.  Note
             that all of the third-party security mechanisms available (whether
             X.509 certificates or a third-party IdP) rely on the security of the
-            third party--this is of course also true of your connection to the
+            third party--this is of course also true of the user's connection to the
             Web site itself. Users who wish to assure themselves of security
             against a malicious identity provider can only do so by verifying
             peer credentials directly, e.g., by checking the peer's fingerprint
