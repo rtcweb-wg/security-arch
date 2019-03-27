@@ -752,7 +752,7 @@ Syntax:
           routed through a connection which has been cryptographically verified
           (through the IdP mechanism or an X.509 certificate in the DTLS-SRTP
           handshake) as being associated with the stated identity. Note that it
-          is unlikely that a browser would have an X.509 certificate, but servers
+          is unlikely that browsers would have X.509 certificates, but servers
           might.  Browsers servicing such requests SHOULD clearly indicate that
           identity to the user when asking for permission.  The idea behind this
           type of permissions is that a user might have a fairly narrow list of
