@@ -30,6 +30,7 @@
 <!ENTITY RFC8261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8261.xml">
 <!ENTITY RFC8445 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8445.xml">
 
+<!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview-19.xml">
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
 <!ENTITY I-D.ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-rtp-usage.xml">
@@ -93,9 +94,10 @@
 
     <section title="Introduction" anchor="sec.introduction">
       <t>
-        The Real-Time Communications on the Web (WebRTC) working group
+        The Real-Time Communications on the Web (RTCWEB) working group
         standardized protocols for real-time communications between Web
-        browsers. The major use cases for WebRTC technology are real-time audio
+        browsers, generally called "WebRTC" <xref traget="I-D.ietf-rtcweb-overview"/>.
+        The major use cases for WebRTC technology are real-time audio
         and/or video calls, Web conferencing, and direct data transfer. Unlike
         most conventional real-time systems, (e.g., SIP-based <xref
         target="RFC3261"></xref> soft phones) WebRTC communications are directly
@@ -744,13 +746,13 @@ Syntax:
         <t>
           In addition, they SHOULD support requests for access that promise that
           media from this grant will be sent to a single communicating peer
-          (obviously there could be other requests for other peers).  E.g.,
+          (obviously there could be other requests for other peers), e.g.,
           "Call customerservice@ford.com".  The semantics of this request are
           that the media stream from the camera and microphone will only be
           routed through a connection which has been cryptographically verified
           (through the IdP mechanism or an X.509 certificate in the DTLS-SRTP
           handshake) as being associated with the stated identity. Note that it
-          is unlikely that browsers would have an X.509 certificate, but servers
+          is unlikely that a browser would have an X.509 certificate, but servers
           might.  Browsers servicing such requests SHOULD clearly indicate that
           identity to the user when asking for permission.  The idea behind this
           type of permissions is that a user might have a fairly narrow list of
@@ -824,7 +826,7 @@ Syntax:
         </t>
 
         <t>
-          Clients MAY permit the formation of data channels without any direct
+          Browsers MAY permit the formation of data channels without any direct
           user approval. Because sites can always tunnel data through the
           server, further restrictions on the data channel do not provide any
           additional security.  (though see <xref
@@ -889,7 +891,7 @@ Syntax:
           one's IP address, which leaks large amounts of location
           information. This has negative privacy consequences in some
           circumstances. The API requirements in this section are intended to
-          mitigate this issue. Note that these requirements are NOT intended to
+          mitigate this issue. Note that these requirements are not intended to
           protect the user's IP address from a malicious site. In general, the
           site will learn at least a user's server reflexive address from any
           HTTP transaction.  Rather, these requirements are intended to allow a
@@ -959,7 +961,7 @@ Syntax:
           Implementations MUST implement SRTP <xref target="RFC3711"/>.
           Implementations MUST implement DTLS <xref target="RFC6347"/> and
           DTLS-SRTP <xref target="RFC5763"/><xref target="RFC5764"/> for SRTP
-          keying. Implementations MUST implement <xref
+          keying. Implementations MUST implement SCTP over DTLS <xref
           target="RFC8261"/>.
         </t>
         <t>
@@ -2249,6 +2251,7 @@ a=sendrecv
       &RFC8261;
       &RFC8445;
 
+      &I-D.ietf-rtcweb-overview;
       &I-D.ietf-rtcweb-security;
       &I-D.ietf-rtcweb-rtp-usage;
       &I-D.ietf-mmusic-sdp-uks;
