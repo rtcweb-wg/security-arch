@@ -21,6 +21,7 @@
 <!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6455.xml">
 <!ENTITY RFC6943 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6943.xml">
 <!ENTITY RFC7022 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7022.xml">
+<!ENTITY RFC6120 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6120.xml"> 
 <!ENTITY RFC7617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7617.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7918.xml">
@@ -30,7 +31,7 @@
 <!ENTITY RFC8261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8261.xml">
 <!ENTITY RFC8445 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8445.xml">
 
-<!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview-19.xml">
+<!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview.xml">
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
 <!ENTITY I-D.ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-rtp-usage.xml">
@@ -96,7 +97,7 @@
       <t>
         The Real-Time Communications on the Web (RTCWEB) working group
         standardized protocols for real-time communications between Web
-        browsers, generally called "WebRTC" <xref traget="I-D.ietf-rtcweb-overview"/>.
+        browsers, generally called "WebRTC" <xref target="I-D.ietf-rtcweb-overview"/>.
         The major use cases for WebRTC technology are real-time audio
         and/or video calls, Web conferencing, and direct data transfer. Unlike
         most conventional real-time systems, (e.g., SIP-based <xref
@@ -130,7 +131,8 @@
         in <xref target="fig.multidomain"/>.  The protocol to be used between
         the domains is not standardized by WebRTC, but given the installed base
         and the form of the WebRTC API is likely to be something SDP-based like
-        SIP or something like Extensible Messaging and Presence Protocol (XMPP).
+        SIP or something like Extensible Messaging and Presence Protocol (XMPP)
+        <xref target="RFC6120"/>.
       </t>
       <figure title="A multidomain WebRTC system" anchor="fig.multidomain">
         <artwork><![CDATA[
@@ -2307,6 +2309,7 @@ a=sendrecv
       &RFC5705;
       &RFC6455;
       &RFC6265;
+      &RFC6943;
       &RFC6943;
       &I-D.ietf-rtcweb-jsep;
 
