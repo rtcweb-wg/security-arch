@@ -558,7 +558,7 @@
     </section>
 
     <section title="SDP Identity Attribute" anchor="sec.sdp-id-attr">
-      <t>
+      <t> f
         The SDP 'identity' attribute is a session-level attribute that
         is used by an endpoint to convey its identity assertion to its
         peer. The identity assertion value is encoded as Base-64, as described
@@ -1702,8 +1702,8 @@ a=sendrecv
                   consist of a string representing the user's identity.  This
                   string is in the form "&lt;user>@&lt;domain>", where <spanx
                   style="verb">user</spanx> consists of any character except
-                  '@', and "domain" is an <xref target="RFC5890">internationalized
-                  domain name</xref> encoded as a sequence of U-labels.
+                  '@', and "domain" is an internationalized domain name
+                  <xref target="RFC5890"/> encoded as a sequence of U-labels.
                 </t>
                 <t>
                   The PeerConnection API MUST check this string as follows:
