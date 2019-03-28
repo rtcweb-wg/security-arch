@@ -741,9 +741,8 @@ Syntax:
         </t>
         <t>
           Because HTTP origins cannot be securely established against network
-          attackers, implementations MUST NOT allow the setting of permanent
-          access permissions for HTTP origins. Implementations MUST
-          refuse all permissions grants for HTTP origins.
+          attackers, implementations MUST refuse all permissions grants for
+          HTTP origins.
         </t>
         <t>
           In addition, they SHOULD support requests for access that promise that
