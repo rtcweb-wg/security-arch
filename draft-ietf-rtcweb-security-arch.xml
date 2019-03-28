@@ -2077,6 +2077,7 @@ a=sendrecv
           <list style="hanging">
              <t hangText="URI suffix:">idp-proxy</t>
              <t hangText="Change controller:">IETF</t>
+          </list>
         </t>
       </section>
 
