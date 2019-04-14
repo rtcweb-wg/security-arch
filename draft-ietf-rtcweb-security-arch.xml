@@ -434,7 +434,7 @@
         <t>
           This message is sent to the signaling server, e.g., by XMLHttpRequest
           <xref target="XmlHttpRequest"/> or by WebSockets <xref
-          target="RFC6455"/>, preferably over TLS <xref target="RFC5246"/>.
+          target="RFC6455"/>, over TLS <xref target="RFC5246"/>.
           The signaling server processes the message from Alice's browser,
           determines that this is a call to Bob and sends a signaling message to
           Bob's browser (again, the format is currently undefined).  The JS on
@@ -507,9 +507,8 @@
 
       <section title="DTLS Handshake">
         <t>
-          Once the ICE checks have completed [more specifically, once some ICE
-          checks have completed], Alice and Bob can set up a secure channel or
-          channels. This is performed via DTLS <xref target="RFC6347"/>
+          Once the requisite ICE checks have completed, Alice and Bob can set
+          up a secure channel or channels. This is performed via DTLS <xref target="RFC6347"/>
           and DTLS-SRTP <xref target="RFC5763"/> keying for SRTP
           <xref target="RFC3711"/> for the media channel and SCTP over DTLS
           <xref target="RFC8261"/> for data
@@ -615,7 +614,7 @@ Syntax:
 
   Note that long lines in the example are folded to meet the column
   width constraints of this document; the backslash ("\") at the end of
-  a line and the carriage return that follows shall be ignored.
+  a line, the carriage return that follows, and whitespaces shall be ignored.
 
       ]]></artwork>
        </figure>
@@ -962,11 +961,7 @@ Syntax:
           Implementations MUST support SRTP <xref target="RFC3711"/>.
           Implementations MUST support DTLS <xref target="RFC6347"/> and
           DTLS-SRTP <xref target="RFC5763"/><xref target="RFC5764"/> for SRTP
-<<<<<<< HEAD
-          keying. Implementations MUST support <xref
-=======
-          keying. Implementations MUST implement SCTP over DTLS <xref
->>>>>>> origin/ad_ben
+          keying. Implementations MUST support SCTP over DTLS <xref
           target="RFC8261"/>.
         </t>
         <t>
@@ -1358,13 +1353,13 @@ Syntax:
           <figure>
             <artwork><![CDATA[
   {
-    "fingerprint": [ {
-      "algorithm": "sha-256",
-      "digest": "4A:AD:B9:B1:3F:...:E5:7C:AB"
-    }, {
-      "algorithm": "sha-1",
-      "digest": "74:E9:76:C8:19:...:F4:45:6B"
-    } ]
+    "fingerprint":
+      [
+        { "algorithm": "sha-256",
+          "digest": "4A:AD:B9:B1:3F:...:E5:7C:AB"},
+        { "algorithm": "sha-1",
+          "digest": "74:E9:76:C8:19:...:F4:45:6B" }
+      ]
   }
 ]]></artwork>
           </figure>
@@ -1424,7 +1419,7 @@ a=sendrecv
 
   Note that long lines in the example are folded to meet the column
   width constraints of this document; the backslash ("\") at the end of
-  a line and the carriage return that follows shall be ignored.
+  a line, the carriage return that follows, and whitespace shall be ignored.
 
 ]]></artwork>
             </figure>
@@ -1686,8 +1681,8 @@ a=sendrecv
                 </list>
               </t>
               <t>
-                <xref target="fig.verify-ex"/> shows an example response
-                formatted as JSON for illustrative purposes.
+                <xref target="fig.verify-ex"/> shows an example response,
+                which is JSON-formatted.
               </t>
 
               <figure title="Example verification result" anchor="fig.verify-ex">
@@ -1705,9 +1700,9 @@ a=sendrecv
                   The identity provided from the IdP to the RP browser MUST
                   consist of a string representing the user's identity.  This
                   string is in the form "&lt;user>@&lt;domain>", where <spanx
-                  style="verb">user</spanx> consists of any character except
-                  '@', and "domain" is an internationalized domain name
-                  <xref target="RFC5890"/> encoded as a sequence of U-labels.
+                  style="verb">user</spanx> consists of any character,
+                  and domain is aninternationalized
+                  domain name <xref target="RFC5890"></xref> encoded as a sequence of U-labels.
                 </t>
                 <t>
                   The PeerConnection API MUST check this string as follows:
@@ -1722,7 +1717,7 @@ a=sendrecv
                     <t>
                       If the "domain" portion of the string is not equal to the
                       domain name of the IdP proxy, then the PeerConnection
-                      object MUST reject the assertion unless:
+                      object MUST reject the assertion unless both:
                       <list style="numbers">
                         <t>
                           the IdP domain is trusted as an acceptable third-party
@@ -1853,7 +1848,8 @@ a=sendrecv
             potentially a problem for privacy, especially for anonymous calling
             services. Such services SHOULD instruct the browser to use separate
             DTLS keys for each call and also to use TURN throughout the
-            call. Otherwise, the other side will learn linkable information.
+            call. Otherwise, the other side will learn linkable information that
+            would allow them to correlate the browser across multiple calls.
             Additionally, browsers SHOULD implement the privacy-preserving CNAME
             generation mode of <xref target="RFC7022"/>.
           </t>
@@ -1982,8 +1978,8 @@ a=sendrecv
               is willing to have their identity revealed to the site (e.g.,
               through the usual IdP permissions dialog) or arrange that the
               identity information is only available to known RPs (e.g., social
-              graph adjacencies) but not to the calling site. The "origin" field
-              of the signature request can be used to check that the user has
+              graph adjacencies) but not to the calling site. The "domain" field
+              of the assertion request can be used to check that the user has
               agreed to disclose their identity to the calling site; because it
               is supplied by the PeerConnection it can be trusted to be correct.
             </t>
@@ -2027,7 +2023,7 @@ a=sendrecv
 
             <section title="Popup Blocking" anchor="sec.popup-blocking">
               <t>
-                The IdP proxy is unable to generate popup windows, dialogs or
+                When popup blocking is in use, the IdP proxy is unable to generate popup windows, dialogs or
                 any other form of user interactions.  This prevents the IdP
                 proxy from being used to circumvent user interaction.  The
                 "LOGINNEEDED" message allows the IdP proxy to inform the calling
@@ -2265,6 +2261,7 @@ a=sendrecv
       &I-D.ietf-rtcweb-security;
       &I-D.ietf-rtcweb-rtp-usage;
       &I-D.ietf-mmusic-sdp-uks;
+      &I-D.ietf-rtcweb-jsep;
 
       <reference anchor="webcrypto">
         <front>
@@ -2320,7 +2317,6 @@ a=sendrecv
       &RFC6943;
       &RFC6943;
       &I-D.ietf-rtcweb-jsep;
-
 
       <reference anchor="XmlHttpRequest">
         <front>
