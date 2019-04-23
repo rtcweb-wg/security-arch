@@ -611,7 +611,7 @@ Syntax:
 
   Note that long lines in the example are folded to meet the column
   width constraints of this document; the backslash ("\") at the end of
-  a line, the carriage return that follows, and whitespaces shall be ignored.
+  a line, the carriage return that follows, and whitespace shall be ignored.
 
       ]]></artwork>
        </figure>
@@ -1355,7 +1355,7 @@ Syntax:
     "fingerprint":
       [
         { "algorithm": "sha-256",
-          "digest": "4A:AD:B9:B1:3F:...:E5:7C:AB"},
+          "digest": "4A:AD:B9:B1:3F:...:E5:7C:AB" },
         { "algorithm": "sha-1",
           "digest": "74:E9:76:C8:19:...:F4:45:6B" }
       ]
