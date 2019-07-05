@@ -558,7 +558,7 @@
     </section>
 
     <section title="SDP Identity Attribute" anchor="sec.sdp-id-attr">
-      <t> f
+      <t>
         The SDP 'identity' attribute is a session-level attribute that
         is used by an endpoint to convey its identity assertion to its
         peer. The identity assertion value is encoded as Base-64, as described
