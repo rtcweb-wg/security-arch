@@ -1594,7 +1594,11 @@ a=sendrecv
                 formatted as JSON.  In this case, the message has presumably
                 been digitally signed/MACed in some way that the IdP can later
                 verify it, but this is an implementation detail and out of scope
-                of this document.  Line breaks are inserted solely for
+                of this document. IdPs SHOULD ensure that any assertions they
+                generate cannot be interpreted in a different context. E.g.,
+                they should use a distinct format or have separate cryptographic
+                keys for assertion generation and other purposes.
+                Line breaks are inserted solely for
                 readability.
               </t>
 
@@ -2316,7 +2320,7 @@ a=sendrecv
       &RFC6265;
       &RFC6943;
       &RFC6120;
-      
+
       <reference anchor="XmlHttpRequest">
         <front>
           <title>XMLHttpRequest Level 2</title>
