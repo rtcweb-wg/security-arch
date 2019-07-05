@@ -673,6 +673,8 @@ Syntax:
              fingerprints. Note that <xref target="I-D.ietf-rtcweb-jsep"/>, Section
              5.2.1 requires that each media section use the same set of
              fingerprints for every media section.
+             If a new identity attribute is received, then the receiver MUST
+             apply that identity to all existing connections.
            </t>
            <t>
              If the set of fingerprints changes, then the sender MUST
