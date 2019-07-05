@@ -1457,9 +1457,7 @@ a=sendrecv
                 <list style="hanging">
                   <t hangText="Authority:">
                        The <xref target="RFC3986"> authority</xref> at which the
-                       IdP's service is hosted.  Note that this may include a non-default
-                       port or a userinfo component, but neither will be available
-                       in a certificate verifying the site.
+                       IdP's service is hosted.
                   </t>
                   <t hangText="protocol:">
                     The specific IdP protocol which the IdP is using. This is a
