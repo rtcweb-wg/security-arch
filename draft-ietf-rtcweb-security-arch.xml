@@ -8,7 +8,6 @@
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
 <!ENTITY RFC4568 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4568.xml">
 <!ENTITY RFC4648 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml">
-<!ENTITY RFC5234 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml">
 <!ENTITY RFC5246 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5246.xml">
 <!ENTITY RFC5479 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5479.xml">
 <!ENTITY RFC5705 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5705.xml">
@@ -22,6 +21,7 @@
 <!ENTITY RFC6455 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6455.xml">
 <!ENTITY RFC6943 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6943.xml">
 <!ENTITY RFC7022 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7022.xml">
+<!ENTITY RFC6120 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6120.xml">
 <!ENTITY RFC7617 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7617.xml">
 <!ENTITY RFC7675 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7675.xml">
 <!ENTITY RFC7918 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7918.xml">
@@ -31,6 +31,7 @@
 <!ENTITY RFC8261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8261.xml">
 <!ENTITY RFC8445 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8445.xml">
 
+<!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview.xml">
 <!ENTITY I-D.ietf-rtcweb-jsep SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-jsep.xml">
 <!ENTITY I-D.ietf-rtcweb-security SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security.xml">
 <!ENTITY I-D.ietf-rtcweb-rtp-usage SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-rtp-usage.xml">
@@ -94,9 +95,10 @@
 
     <section title="Introduction" anchor="sec.introduction">
       <t>
-        The Real-Time Communications on the Web (WebRTC) working group is tasked
-        with standardizing protocols for real-time communications between Web
-        browsers. The major use cases for WebRTC technology are real-time audio
+        The Real-Time Communications on the Web (RTCWEB) working group
+        standardized protocols for real-time communications between Web
+        browsers, generally called "WebRTC" <xref target="I-D.ietf-rtcweb-overview"/>.
+        The major use cases for WebRTC technology are real-time audio
         and/or video calls, Web conferencing, and direct data transfer. Unlike
         most conventional real-time systems, (e.g., SIP-based <xref
         target="RFC3261"></xref> soft phones) WebRTC communications are directly
@@ -129,7 +131,8 @@
         in <xref target="fig.multidomain"/>.  The protocol to be used between
         the domains is not standardized by WebRTC, but given the installed base
         and the form of the WebRTC API is likely to be something SDP-based like
-        SIP.
+        SIP or something like Extensible Messaging and Presence Protocol (XMPP)
+        <xref target="RFC6120"/>.
       </t>
       <figure title="A multidomain WebRTC system" anchor="fig.multidomain">
         <artwork><![CDATA[
@@ -666,7 +669,7 @@ Syntax:
            <t>
              When modifying a session, if the set of fingerprints is
              unchanged, then the sender MAY send the same 'identity' attribute. In
-             this case, the established identity SHOULD be applied to existing DTLS
+             this case, the established identity MUST be applied to existing DTLS
              connections as well as new connections established using one of those
              fingerprints. Note that <xref target="I-D.ietf-rtcweb-jsep"/>, Section
              5.2.1 requires that each media section use the same set of
@@ -738,20 +741,19 @@ Syntax:
         </t>
         <t>
           Because HTTP origins cannot be securely established against network
-          attackers, implementations MUST NOT allow the setting of permanent
-          access permissions for HTTP origins. Implementations MUST
-          refuse all permissions grants for HTTP origins.
+          attackers, implementations MUST refuse all permissions grants for
+          HTTP origins.
         </t>
         <t>
           In addition, they SHOULD support requests for access that promise that
           media from this grant will be sent to a single communicating peer
-          (obviously there could be other requests for other peers).  E.g.,
+          (obviously there could be other requests for other peers), eE.g.,
           "Call customerservice@example.org".  The semantics of this request are
           that the media stream from the camera and microphone will only be
           routed through a connection which has been cryptographically verified
           (through the IdP mechanism or an X.509 certificate in the DTLS-SRTP
           handshake) as being associated with the stated identity. Note that it
-          is unlikely that browsers would have an X.509 certificate, but servers
+          is unlikely that browsers would have X.509 certificates, but servers
           might.  Browsers servicing such requests SHOULD clearly indicate that
           identity to the user when asking for permission.  The idea behind this
           type of permissions is that a user might have a fairly narrow list of
@@ -825,7 +827,7 @@ Syntax:
         </t>
 
         <t>
-          Clients MAY permit the formation of data channels without any direct
+          Browsers MAY permit the formation of data channels without any direct
           user approval. Because sites can always tunnel data through the
           server, further restrictions on the data channel do not provide any
           additional security.  (See <xref
@@ -890,7 +892,7 @@ Syntax:
           one's IP address, which leaks large amounts of location
           information. This has negative privacy consequences in some
           circumstances. The API requirements in this section are intended to
-          mitigate this issue. Note that these requirements are NOT intended to
+          mitigate this issue. Note that these requirements are not intended to
           protect the user's IP address from a malicious site. In general, the
           site will learn at least a user's server reflexive address from any
           HTTP transaction.  Rather, these requirements are intended to allow a
@@ -960,7 +962,11 @@ Syntax:
           Implementations MUST support SRTP <xref target="RFC3711"/>.
           Implementations MUST support DTLS <xref target="RFC6347"/> and
           DTLS-SRTP <xref target="RFC5763"/><xref target="RFC5764"/> for SRTP
+<<<<<<< HEAD
           keying. Implementations MUST support <xref
+=======
+          keying. Implementations MUST implement SCTP over DTLS <xref
+>>>>>>> origin/ad_ben
           target="RFC8261"/>.
         </t>
         <t>
@@ -2239,7 +2245,6 @@ a=sendrecv
       &RFC4566;
       &RFC4568;
       &RFC4648;
-      &RFC5234;
       &RFC5246;
       &RFC5763;
       &RFC5764;
@@ -2256,6 +2261,7 @@ a=sendrecv
       &RFC8261;
       &RFC8445;
 
+      &I-D.ietf-rtcweb-overview;
       &I-D.ietf-rtcweb-security;
       &I-D.ietf-rtcweb-rtp-usage;
       &I-D.ietf-mmusic-sdp-uks;
@@ -2311,6 +2317,7 @@ a=sendrecv
       &RFC5705;
       &RFC6455;
       &RFC6265;
+      &RFC6943;
       &RFC6943;
       &I-D.ietf-rtcweb-jsep;
 
