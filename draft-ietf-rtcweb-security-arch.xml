@@ -442,7 +442,10 @@
           Alice's identity. In this case, Alice has provided an identity
           assertion and so Bob's browser contacts Alice's identity provider
           (again, this is done in a generic way so the browser has no specific
-          knowledge of the IdP) to verify the assertion. This allows the browser
+          knowledge of the IdP) to verify the assertion. It is also possible
+          to have IdPs with which the browser has a specific trustrelationship,
+          as described in <xref target="sec.trust-relationships"/>.
+          This allows the browser
           to display a trusted element in the browser chrome indicating that a
           call is coming in from Alice. If Alice is in Bob's address book, then
           this interface might also include her real name, a picture, etc.  The
@@ -659,8 +662,10 @@ Syntax:
            <t>
              When an endpoint receives an offer or answer that contains an 'identity'
              attribute, the answerer can use the the attribute information to
-             contact the IdP, and verify the identity of the peer. If the
-             identity verification fails, the answerer MUST discard the
+             contact the IdP and verify the identity of the peer. If the identity
+             requires a third-party IdP as described in <xref target="sec.trust-relationships"/>
+             then that IdP will need to have been specifically configured. 
+             If the identity verification fails, the answerer MUST discard the
              offer or answer as malformed.
            </t>
          </section>
@@ -2316,7 +2321,7 @@ a=sendrecv
       &RFC6265;
       &RFC6943;
       &RFC6120;
-      
+
       <reference anchor="XmlHttpRequest">
         <front>
           <title>XMLHttpRequest Level 2</title>
