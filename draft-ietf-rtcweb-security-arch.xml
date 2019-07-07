@@ -1594,13 +1594,7 @@ a=sendrecv
                 formatted as JSON.  In this case, the message has presumably
                 been digitally signed/MACed in some way that the IdP can later
                 verify it, but this is an implementation detail and out of scope
-                of this document. IdPs SHOULD ensure that any assertions they
-                generate cannot be interpreted in a different context. E.g.,
-                they should use a distinct format or have separate cryptographic
-                keys for assertion generation and other purposes.
-                Line breaks are inserted solely for
-                readability.
-              </t>
+                of this document.              </t>
 
               <figure title="Example assertion" anchor="fig.assert-ex">
                 <artwork><![CDATA[
@@ -1620,6 +1614,12 @@ a=sendrecv
                 For use in signaling, the assertion is serialized into JSON,
                 <xref target="RFC4648">Base64-encoded</xref>, and used as the
                 value of the <spanx style="verb">identity</spanx> attribute.
+                IdPs SHOULD ensure that any assertions they
+                generate cannot be interpreted in a different context. E.g.,
+                they should use a distinct format or have separate cryptographic
+                keys for assertion generation and other purposes.
+                Line breaks are inserted solely for
+                readability.
               </t>
             </section>
 
