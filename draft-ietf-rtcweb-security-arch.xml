@@ -3,6 +3,7 @@
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC2818 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY RFC3261 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3261.xml">
+<!ENTITY RFC3264 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3264.xml">
 <!ENTITY RFC3711 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3711.xml">
 <!ENTITY RFC3986 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml">
 <!ENTITY RFC4566 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4566.xml">
@@ -633,7 +634,7 @@ Syntax:
        </t>
        <section title="Offer/Answer Considerations" anchor="sec.sdp-id-attr-oa">
          <t>
-           This section defines the SDP Offer/Answer <xref target="RFC6454"/> considerations for the SDP
+           This section defines the SDP Offer/Answer <xref target="RFC3264"/> considerations for the SDP
            'identity' attribute.
          </t>
          <t>
@@ -2247,6 +2248,7 @@ a=sendrecv
     <references title="Normative References">
       &RFC2119;
       &RFC2818;
+      &RFC3264;
       &RFC3711;
       &RFC3986;
       &RFC4566;
